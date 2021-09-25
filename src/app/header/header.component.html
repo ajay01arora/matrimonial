@@ -1,0 +1,101 @@
+<section id="top">
+ <div class="container">
+  <div class="row">
+   <div class="top clearfix">
+    <div class="col-sm-6">
+	 <div class="top_left">
+	  <p>Hello world! Lorem ipsum dolor sit adipiscing elit</p>
+	 </div>
+	</div>
+	<div class="col-sm-6">
+	  <div class="top_right clearfix text-right">
+		  <span class="span_1"><i class="fa fa-phone-square"></i>  +91 - 1243-545-423  </span>
+		  <span class="span_2"> <i class="fa fa-whatsapp"></i>  +91 - 2132-544-434 </span>
+	  </div>
+	</div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section id="header" class="cd-secondary-nav">
+ <div class="container">
+  <div class="row">
+   <div class="col-sm-12">
+     <nav class="navbar-default" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+               <span class="sr-only">Toggle navigation</span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               </button>
+               <a class="navbar-brand" routerLink="/home">Matrimonial <br><span>Best Matrimony Website</span></a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+               
+               
+              <ul class="nav navbar-right">
+              <li><a class="color_1 active_1" routerLink="/home">Home</a></li>                  
+				  <li><a class="color_1" routerLink="/about">About Us</a></li>
+				  <li><a class="color_1" routerLink="/services">Services</a></li>				  
+				  <li><a class="color_1" routerLink="/contact">Contact Us</a></li>
+				  <li><a class="color_1" routerLink="/admin-list">List of Admin</a></li>
+              <li *ngIf="currentUser"><a class="color_1" routerLink="/candidate-form">Candidate Form</a></li>
+              <li *ngIf="currentUser"><a class="color_1" routerLink="/candidate-list">Candidate List</a></li>
+				  <li><a class="color_1" routerLink="/instruction">Instruction</a></li>
+              <li (click)="show=!show">
+                    <div *ngIf="currentUser; else notShow">
+                        <a (click)="logout()" class="color_1">Logout</a>                          
+                      </div>      
+                </li>         
+                <ng-template #notShow>             
+                <li><a class="color_1" routerLink="/register">Register</a></li>
+                <li><a href="#myModal" class="color_1 trigger-btn" data-toggle="modal">Login</a></li>
+                </ng-template>
+               </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- Modal HTML -->
+<div id="myModal" class="modal fade">
+	<div class="modal-dialog modal-login">
+		<div class="modal-content">
+			<div class="modal-header">
+				<div class="avatar">
+					<img src="" alt="Avatar">
+				</div>				
+				<h4 class="modal-title">Member Login</h4>	
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			</div>
+			<div class="modal-body">
+				<form #f="ngForm" (ngSubmit)="login(f)">
+					<div class="form-group">
+						<input type="text" class="form-control" name="phone" 
+                        [(ngModel)]="username"
+                        placeholder="Phone Number or Userid" required="required"
+                        />		
+					</div>
+					<div class="form-group">
+						<input type="password" class="form-control" name="password" 
+                        [(ngModel)]="password"                       
+                         placeholder="Password" required="required" />	
+					</div>        
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary btn-lg btn-block login-btn">Login</button>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<a href="/register">To Be an Admin</a>
+			</div>
+		</div>
+	</div>
+</div> 

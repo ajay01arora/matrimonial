@@ -1,0 +1,44 @@
+<div class="container">
+    <div class="row">
+      <div class="col-12">
+          <table class="table table-image">
+            <thead>
+              <tr>
+                <th scope="col">Image</th>
+                <th scope="col">Admin Name</th>
+                <th scope="col">Place</th>
+                <th scope="col">Phone Number</th>                
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let admin of AdminList; index as i;">
+                <td class="w-25">
+                    <img src="https://wallpaperaccess.com/full/2581085.jpg" alt="Sheep" height="200px"/>
+                </td>
+                <td>{{admin.name}}</td>
+                <td>{{admin.place}}</td>
+                <td>{{admin.phone}}</td>                
+              </tr>
+            </tbody>
+          </table>   
+      </div>
+      <div class="col-12" *ngIf= !IsDataAvailable>
+        <h2>No Admin Added or Remaining. </h2>
+      </div>
+    </div>
+
+  <div class="row">
+    <div class="col-12" *ngIf=IsDataAvailable>
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li class="page-item" *ngIf="pageNumber !== 1">
+            <a class="page-link" (click)="MoreDeal('previous')" tabindex="-1" style="background-color: darkslategrey;color: white;">Previous Page</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" (click)="MoreDeal('next')" style="background-color: darkslategrey;     color: white">Next Page</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>

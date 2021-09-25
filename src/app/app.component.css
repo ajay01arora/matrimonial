@@ -1,0 +1,7 @@
+.header {
+    background: red;
+}
+
+.navbar li {
+    display: inline-block;
+}

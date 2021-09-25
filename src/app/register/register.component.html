@@ -1,0 +1,138 @@
+
+  <section id="about_heading" class="about_register">
+    <div class="container">
+     <div class="row">
+      <div class="col-sm-12">
+       <div class="about_heading">
+         <h5><a href="#">Home</a> <span>//</span>Register</h5>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+   
+   <section id="register" class="clearfix">
+    <div class="register clearfix">
+     <div class="col-sm-5 space_left">
+      <div class="register_left">
+       <div class="card-image"><img src="../../assets/img/45.jpg" width="100%"></div>
+      </div>
+     </div>
+     <div class="col-sm-7">
+      <div class="register_right">
+       <h3>Sign Up</h3>
+       <hr>
+       <form [formGroup]="registerForm" (ngSubmit)="register()"> 
+       <div class="register_right_inner clearfix">
+         <div class="clearfix clear_1">
+           <div class="col-sm-6 register_right_inner_1 space_left">
+          <input type="text" class="form-control" placeholder="Name *"
+          formControlName="name"
+        [ngClass]="{ 'is-invalid':  f.name.errors }" />
+
+        <div class="invalid-feedback col-md-6">
+            <span 
+            *ngIf="(f.name.touched || submitted) && f.name.errors?.required"
+            class="alert-danger">
+              Please enter your name.
+            </span>
+          </div> 
+        </div>
+
+      </div>
+
+      <div class="clearfix clear_1">
+      <div class="col-sm-6 register_right_inner_1 space_left">
+        <input type="file" class="form-control" id="customFile" 
+        (change)="onFileChange($event)" />
+      </div>
+     
+      <div *ngIf=imgPath class="col-sm-6 register_right_inner_1 space_left">
+       <img src="https://lootersisland.com/Matrimonial/Api/storage/app/public/temp/{{imgPath}}" width="250" height="250"/>
+     </div>
+     </div>
+
+         <div class="clearfix clear_1">
+           <div class="col-sm-6 register_right_inner_1 space_left">
+          <input type="text" class="form-control" placeholder="Place *"
+            formControlName="place"
+            [ngClass]="{ 'is-invalid':  f.place.errors }" />
+          <div class="invalid-feedback col-md-6">
+            <span 
+            *ngIf="(f.place.touched || submitted) && f.place.errors?.required"
+            class="alert-danger">
+              Please enter the place.
+            </span>
+          </div> 
+        </div>
+        </div>
+         <div class="clearfix clear_1">
+           <div class="col-sm-6 register_right_inner_1 space_left">
+          <input type="number" class="form-control" placeholder="Phone Number *"
+          formControlName="phone"
+            [ngClass]="{ 'is-invalid':  f.phone.errors }" />
+          <div class="invalid-feedback col-md-6">
+            <span
+            class="alert-danger"
+            *ngIf="(f.phone.touched || submitted) && f.phone.errors?.required">
+              Phone number must be of 10 character.
+            </span>
+          </div> 
+        </div>
+        </div>
+        <h2>Preferred/ Create</h2>
+        <div class="clearfix clear_1">
+           <div class="col-sm-3 register_right_inner_1 space_left">
+               <label for="Userid">User Id:</label>
+             </div>	
+           <div class="col-sm-6 register_right_inner_1 space_left">
+                  <input type="text" class="form-control" placeholder=""
+                  formControlName="userId"
+                    [ngClass]="{ 'is-invalid': f.userId.errors }" />
+                  <div class="invalid-feedback col-md-6">
+                    <span 
+                    *ngIf="(f.userId.touched || submitted) && f.userId.errors?.required"
+                    class="alert-danger">
+                      Please enter the user Id.
+                    </span>
+                    <span
+                    class="alert-danger"
+                    *ngIf="(f.userId.touched || submitted) && f.userId.errors?.minlength">
+                      User Id must be more than 8 character.
+                    </span>
+                  </div> 
+            </div>
+        </div>
+         <div class="clearfix clear_1">
+           <div class="col-sm-3 register_right_inner_1 space_left">
+               <label for="pwd">Password:</label>
+             </div>	
+           <div class="col-sm-6 register_right_inner_1 space_left">
+          <input type="password" class="form-control" placeholder=""
+          formControlName="password"
+            [ngClass]="{ 'is-invalid':  f.password.errors }" />
+          <div class="invalid-feedback col-md-6">
+            <span 
+            *ngIf="(f.password.touched || submitted) && f.password.errors?.required"
+            class="alert-danger">
+              Please enter the password.
+            </span>
+            <span
+            class="alert-danger"
+            *ngIf="(f.password.touched || submitted) && f.password.errors?.minlength">
+              Password must be more than 8 character.
+            </span>
+          </div> 
+        </div>
+        </div>
+        </div>
+        <div class="clearfix col-sm-12 clear_2">
+            <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">{{saveButton}}</button>
+        </div>
+       </form>
+       </div>
+      </div>
+     </div>
+   </section>
+   
+
