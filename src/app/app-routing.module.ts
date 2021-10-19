@@ -6,6 +6,7 @@ import { AuthGuardGuard } from './auth-guard.guard';
 import { CandidateFormComponent } from './candidate-form/candidate-form.component';
 import { CandidateListMenComponent } from './candidate-list-men/candidate-list-men.component';
 import { CandidateListComponent } from './candidate-list/candidate-list.component';
+import { ContactQueriesComponent } from './contact-queries/contact-queries.component';
 import { ContactComponent } from './contact/contact.component';
 import {HomeComponent} from './home/home.component'
 import { PagesComponent } from './pages/pages.component';
@@ -21,10 +22,11 @@ const routes: Routes = [
   { path: "pages", component: PagesComponent },
   { path: "candidate-list", component: CandidateListComponent },
   { path: "admin-list", component: AdminListComponent },
+  { path: "contact-queries", component: ContactQueriesComponent },
   { path: "services", component: ServicesComponent },
   { path: "candidate-form", component: CandidateFormComponent, canActivate: [AuthGuardGuard]},
-  { path: "candidate-list/men", component: CandidateListMenComponent},
-  { path: "candidate-list/women", component: CandidateListMenComponent },
+  { path: "candidate-list/male", component: CandidateListMenComponent},
+  { path: "candidate-list/female", component: CandidateListMenComponent },
   { path: "candidate-list/edit/:id", component: CandidateFormComponent, canActivate: [AuthGuardGuard] },
   { path: "candidate-list/details/:id", component: CandidateFormComponent },
 ];

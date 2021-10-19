@@ -59,18 +59,22 @@ export class BackendService {
     const data = await this.http.post<any>(apiUrl+"candidate", value, httpOptions).toPromise();
     return data;
   }
+
+  async contactSuperAdmin(value: any) {
+    const data = await this.http.post<any>(apiUrl+"contact", value, httpOptions).toPromise();
+    return data;
+  }
     
   async registerAdmin(value: IAdmin, filedata: any) {
     value.approved = false;    
     const data = await this.http.post<any>(apiUrl+"admin", value, httpOptions).toPromise();
-    this.uploadImage(filedata);
     
     if (data.loginSuccess) {
       localStorage.setItem('currentUser', JSON.stringify(data.admin));
       localStorage.setItem('isLoggedIn', "true");
       this.currentUserSubject?.next(data.admin);
      }
-     return data.loginSuccess;
+     return data;
   }
 
   async uploadImage(filedata : any)
@@ -95,9 +99,9 @@ export class BackendService {
     console.log("login "+data);
 
     if (data.loginSuccess) {
-      localStorage.setItem('currentUser', JSON.stringify(data.admin));
+      localStorage.setItem('currentUser', JSON.stringify(data));
       localStorage.setItem('isLoggedIn', "true");
-      this.currentUserSubject?.next(data.admin);
+      this.currentUserSubject?.next(data);
      }
 
      return data;
@@ -116,12 +120,38 @@ export class BackendService {
     return this.http.get(apiUrl+"admin?pageNumber="+pageNumber);
   }
 
+  GetAdminListForSuperAdmin(pageNumber: number){
+    return this.http.get(apiUrl+"admin/list/1/"+pageNumber);
+  }
+  
+
+  GetContactList(pageNumber: number){
+    return this.http.get(apiUrl+"contact?pageNumber="+pageNumber);
+  }
+
   GetCandidateList(pageNumber: number) {
     return this.http.get(apiUrl+"candidate?pageNumber="+pageNumber);
+  }
+
+  GetCandidateListByGender(gender :string, pageNumber: number) {
+    return this.http.get(apiUrl+"candidate/"+gender+"/"+pageNumber);
   }
 
   async GetCandidateById(customerId: any){
     return await this.http.get<any>(apiUrl+"candidate/"+customerId).toPromise();
   }
+
+  async ApproveorReject(adminId : number, approval : boolean) {
+    return await this.http.get<any>(apiUrl+"admin/approval/"+adminId+"/"+approval).toPromise();
+  }
+
+  GetCandidateListThroughFilter(filterData: { education: string; height: string; age: string; }) {
+    return this.http.post(apiUrl+"candidate/filter", filterData);
+  }
+
+  async updateQuery(id: any) {
+    return await this.http.get<any>(apiUrl+"contact/read/"+id).toPromise();
+  }
+
   
 }

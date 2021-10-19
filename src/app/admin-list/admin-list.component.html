@@ -7,17 +7,24 @@
                 <th scope="col">Image</th>
                 <th scope="col">Admin Name</th>
                 <th scope="col">Place</th>
-                <th scope="col">Phone Number</th>                
+                <th scope="col">Phone Number</th>                                
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let admin of AdminList; index as i;">
                 <td class="w-25">
-                    <img src="https://wallpaperaccess.com/full/2581085.jpg" alt="Sheep" height="200px"/>
+                  <img class="lazy card-img-top postthumb img-responsive mt-4"
+                  src="{{admin.img}}" style="width: 90%; height: 17rem; margin-left:-18%;"
+                  onerror="this.src='assets/img/logo.jpg'">
                 </td>
                 <td>{{admin.name}}</td>
                 <td>{{admin.place}}</td>
-                <td>{{admin.phone}}</td>                
+                <td>{{admin.phone}}</td>
+                <td *ngIf="isSuperAdmin">
+                  <button class="btn-danger" *ngIf="admin.approved == true"  id={{admin.adminId}} (click)=approveOrReject($event)>Reject</button>
+                  <button class="btn-success" *ngIf="admin.approved == false" id="{{admin.adminId}}" (click)=approveOrReject($event)>Approve</button>
+                  <button class="btn-danger" (click)="Remove($event)" id="{{admin.adminId}}">Remove </button>
+                </td>                
               </tr>
             </tbody>
           </table>   

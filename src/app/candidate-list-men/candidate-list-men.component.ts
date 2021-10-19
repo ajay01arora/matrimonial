@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BackendService } from '../backend.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-candidate-list-men',
@@ -9,19 +10,22 @@ import { BackendService } from '../backend.service';
 export class CandidateListMenComponent implements OnInit {
 
   
-  constructor(private backendService : BackendService) { }
+  constructor(private activatedRoute : ActivatedRoute,private backendService : BackendService) { }
 
   CandidateList: Array<any> =[];
   pageNumber = 1;
+  gender : string = "";
 
   ngOnInit(): void {
-    this.backendService.GetCandidateList(this.pageNumber).subscribe((data : any) => {
+    
+    this.gender = this.activatedRoute.snapshot?.url[1]?.path;
+    this.backendService.GetCandidateListByGender(this.gender, this.pageNumber).subscribe((data : any) => {
       this.CandidateList = data;
     });
   }
   get IsDataAvailable()
   {
-    return this.CandidateList.length != 0;
+    return this.CandidateList?.length != 0;
   }
 
   async Remove(event: any)
@@ -35,12 +39,20 @@ export class CandidateListMenComponent implements OnInit {
     }
   }
 
+  ClearFilter()
+  {
+    this.filterData = { education : "", height : "", age : "", gender : this.gender}
+    this.backendService.GetCandidateListByGender(this.gender, this.pageNumber).subscribe((data : any) => {
+      this.CandidateList = data;
+    });
+  }
+
   MoreDeal(direction : string)
   {
     if(direction === 'next')
     {
       window.scroll(0,0)
-      this.backendService.GetCandidateList(++this.pageNumber).subscribe((data : any)=>
+      this.backendService.GetCandidateListByGender(this.gender, ++this.pageNumber).subscribe((data : any)=>
       {
         this.CandidateList = data
       });
@@ -48,14 +60,14 @@ export class CandidateListMenComponent implements OnInit {
     }else if(direction === 'previous')
     {
       window.scroll(0,0)
-      this.backendService.GetCandidateList(--this.pageNumber).subscribe((data : any)=>
+      this.backendService.GetCandidateListByGender(this.gender, --this.pageNumber).subscribe((data : any)=>
       {        
         this.CandidateList = data 
       }) 
     }
   }
 
-  filterData = { education : "", height : "", age : ""}
+  filterData = { education : "", height : "", age : "", gender : this.gender}
 
   // filerPlace(e : any) 
   // {
@@ -74,19 +86,23 @@ export class CandidateListMenComponent implements OnInit {
   //   console.log(e.target.value);
   // }
 
-  filerHeight(e : any) 
+  filteredData(e : any) 
   {
-    this.filterData.height = e.target.value;
-    console.log(e.target.value);
-  }
-  filerAge(e : any) 
-  {
-    this.filterData.age = e.target.value;
-    console.log(e.target.value);
-  }
-  filerEduation(e : any) 
-  {
+    if(e.target.name == "education")
+    {
     this.filterData.education = e.target.value;
-    console.log(e.target.value);
+    }
+    else if(e.target.name == "height")
+    {
+      this.filterData.height = e.target.value;
+    }
+    else if(e.target.name == "age")
+    {
+      this.filterData.age = e.target.value;
+    }
+    this.backendService.GetCandidateListThroughFilter(this.filterData).subscribe((data : any)=>
+    {        
+      this.CandidateList = data 
+    }) 
   }
 }

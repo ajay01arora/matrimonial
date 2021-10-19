@@ -2,7 +2,8 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/cor
 import { FormGroup,FormBuilder, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { BackendService } from '../backend.service';
-import {DomSanitizer} from '@angular/platform-browser';
+
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -11,7 +12,7 @@ import {DomSanitizer} from '@angular/platform-browser';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(public fb : FormBuilder, private router : Router, private backendService : BackendService, private sanitizer:DomSanitizer) { }
+  constructor(public fb : FormBuilder, private router : Router, private backendService : BackendService, private toastr:ToastrService) { }
 
   registerForm!: FormGroup;
   saveButton : string = "Register";
@@ -20,7 +21,7 @@ export class RegisterComponent implements OnInit {
   imgPath : string = "";
 
   async ngOnInit(){
-
+    
     this.registerForm = this.fb.group({
       name : ["", [Validators.required]],
       place : ["", [Validators.required]],
@@ -29,10 +30,6 @@ export class RegisterComponent implements OnInit {
       phone : ["", [Validators.required, Validators.minLength(10)]]
     });
   }
-
-  sanitize(url:string){
-    return this.sanitizer.bypassSecurityTrustUrl(url);
-}
 
   async onFileChange(event : any) {  
     if (event.target.files.length > 0) {
@@ -53,7 +50,7 @@ export class RegisterComponent implements OnInit {
 
   async register() 
   {
-    this.saveButton = "Registering";
+    this.toastr.info("hello");
     this.submitted=true;
     
     if (this.registerForm.invalid) {
@@ -62,11 +59,16 @@ export class RegisterComponent implements OnInit {
 
     if (this.registerForm.valid && this.imgPath != "")
     {
+      
       this.registerForm.value.img = this.imgPath;
       const data=  await this.backendService.registerAdmin(this.registerForm.value, this.filedata)
-        if(data){          
+      if(data.loginSuccess == true)
+      {          
             this.router.navigate(['/home'])
-          }
+      }else
+      {
+        alert(data.message);
+      }
     }      
   }
 }

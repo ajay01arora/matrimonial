@@ -13,18 +13,68 @@ export class AdminListComponent implements OnInit {
 
   AdminList: Array<IAdmin> =[];
   pageNumber = 1;
+  currentUser:any;
+  isSuperAdmin : boolean = false;
 
   ngOnInit(): void {
 
-    this.backendService.GetAdminList(this.pageNumber).subscribe((data : any) => {
-      this.AdminList = data;
-    });
+    this.backendService.currentUser?.subscribe(x => 
+      {
+        if(x?.role == "super-admin")
+        {
+          this.isSuperAdmin = true;
+        }
+      }
+    );
+    if(this.isSuperAdmin)
+    {
+      this.backendService.GetAdminListForSuperAdmin(this.pageNumber).subscribe((data : any) => {
+        this.AdminList = data;
+      });
+    }
+    else
+    {
+      this.backendService.GetAdminList(this.pageNumber).subscribe((data : any) => {
+        this.AdminList = data;
+      });
+    }
+  }
 
+  async Remove(event: any)
+  {
+    if(confirm("Are you sure you want to delete candidate?"))
+    {
+       await this.backendService.deleteCandidate(event.target.id);
+       this.AdminList.forEach((value,index)=>{
+        if(value.adminId==event.target.id) this.AdminList.splice(index,1);
+    });
+    }
   }
 
   get IsDataAvailable()
   {
-    return this.AdminList.length != 0;
+    return this.AdminList?.length != 0;
+  }
+
+  async approveOrReject(event : any)
+  {
+    var approval = false;
+    if(event.target.innerText == "Approve")
+    {
+        approval =  true;
+    }
+    
+    const response = await this.backendService.ApproveorReject(event.target.id, approval);
+    if(response.status == 200)
+    {
+      this.AdminList.forEach(a => {
+        if(a.adminId == event.target.id)
+        {
+          a.approved = approval;
+        }
+      });
+
+    }
   }
 
   MoreDeal(direction : string)
@@ -32,18 +82,33 @@ export class AdminListComponent implements OnInit {
     if(direction === 'next')
     {
       window.scroll(0,0)
-      this.backendService.GetCandidateList(++this.pageNumber).subscribe((data : any)=>
+      if(this.isSuperAdmin)
       {
-        this.AdminList = data
-      });
-
+        this.backendService.GetAdminListForSuperAdmin(++this.pageNumber).subscribe((data : any) => {
+          this.AdminList = data;
+        });
+      }
+      else
+      {
+        this.backendService.GetAdminList(this.pageNumber).subscribe((data : any) => {
+          this.AdminList = data;
+        });
+      }
     }else if(direction === 'previous')
     {
       window.scroll(0,0)
-      this.backendService.GetCandidateList(--this.pageNumber).subscribe((data : any)=>
-      {        
-        this.AdminList = data 
-      }) 
+      if(this.isSuperAdmin)
+      {
+        this.backendService.GetAdminListForSuperAdmin(--this.pageNumber).subscribe((data : any) => {
+          this.AdminList = data;
+        });
+      }
+      else
+      {
+        this.backendService.GetAdminList(--this.pageNumber).subscribe((data : any) => {
+          this.AdminList = data;
+        });
+      }
     }
   }
 

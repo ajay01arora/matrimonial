@@ -11,7 +11,7 @@ import { BackendService } from '../backend.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private router: Router, private backendService : BackendService) { }
+  constructor(private router: Router, private backendService : BackendService) {  }
   
   show:boolean=false;
   currentUser:any;
@@ -19,7 +19,6 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.backendService.currentUser?.subscribe(x => 
            {
-             console.log("Login User======",x)
              this.currentUser = x
            }
          );
@@ -41,11 +40,14 @@ async login(f : NgForm) {
 
     const loginData = await this.backendService.login(this.username, this.password);
 
-    if (loginData) {
-        console.log("data====", loginData)
+    if (loginData.loginSuccess) {
         this.router.navigate(['/home']);
+        setTimeout(() => {
+          location.reload();  
+        }, 1000);
+        
     } else {
-        //this.message = "Please check your userid and password";
+        alert(loginData.message);
     }
 }
 

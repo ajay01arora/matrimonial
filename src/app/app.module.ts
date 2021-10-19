@@ -22,6 +22,10 @@ import { CandidateFormComponent } from './candidate-form/candidate-form.componen
 import { CandidateListMenComponent } from './candidate-list-men/candidate-list-men.component';
 import { AgePipe } from './pipe/age.pipe';
 
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ContactQueriesComponent } from './contact-queries/contact-queries.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +41,8 @@ import { AgePipe } from './pipe/age.pipe';
     ServicesComponent,
     CandidateFormComponent,
     CandidateListMenComponent,
-    AgePipe
+    AgePipe,
+    ContactQueriesComponent
   ],
   imports: [
     BrowserModule,
@@ -46,6 +51,14 @@ import { AgePipe } from './pipe/age.pipe';
     HttpClientModule,
     FormsModule,    
     ReactiveFormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(
+      {
+        timeOut :1000,
+        progressBar : true,
+        progressAnimation: 'increasing'
+      }
+    )
   ],
   providers: [],
   bootstrap: [AppComponent]

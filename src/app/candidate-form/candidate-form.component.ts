@@ -2,7 +2,6 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/cor
 import { FormGroup,FormBuilder, Validators} from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { BackendService } from '../backend.service';
-import { IAdmin} from '../interfaces/admin';
 
 @Component({
   selector: 'app-candidate-form',
@@ -51,6 +50,12 @@ export class CandidateFormComponent implements OnInit {
       {
         this.isReadOnly = true;
       }
+      else if(this.pageName == "edit")
+      {
+        this.saveButton = "Update details";
+        this.imgPath = data.img;
+        
+      }
     }
     else
     {
@@ -75,9 +80,16 @@ export class CandidateFormComponent implements OnInit {
     console.log(e.target.value);
   }
 
-  onFileChange(event : any) {  
+  async onFileChange(event : any) {  
     if (event.target.files.length > 0) {
       this.filedata = event.target.files[0];
+      const data = await this.backendService.uploadImage(this.filedata);
+
+      if(data.status == 200)
+      {
+          this.candidateForm.value.img = data.imgPath;
+          this.imgPath = data.imgPath;
+      }
     }
   }
 
@@ -94,8 +106,9 @@ export class CandidateFormComponent implements OnInit {
       return;
     }
 
-    if (this.candidateForm.valid)
+    if (this.candidateForm.valid && this.imgPath != "")
     {
+      this.candidateForm.value.img = this.imgPath;
       var data;
       if(this.pageName == "edit")
       {
@@ -105,12 +118,17 @@ export class CandidateFormComponent implements OnInit {
          data=  await this.backendService.registerCandidate(this.candidateForm.value, this.filedata)
          
       }
-
-       if(data.status == 200)
-        {            
-          console.log("registered candidate=====data====",data)
-          this.router.navigate(['/candidate-list'])
-        }
+      if(data.status == 200)
+      {          
+            //this.router.navigate(['/home'])
+      }else
+      {
+        alert(data.message);
+      }
+    }
+    else
+    {
+      alert("Img is not uploaded yet. Please try again!")
     }
   }
 

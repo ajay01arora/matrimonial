@@ -46,7 +46,7 @@
               <label for="dob">Date of Birth:</label>
             </div>	
           <div class="col-sm-6 register_right_inner_1 space_left">
-                 <input type="text" class="form-control" placeholder="Day/Month/Year"
+                 <input type="date" class="form-control" placeholder="Day/Month/Year"
                  formControlName="dob"
                  [readonly]="isReadOnly"
                    [ngClass]="{ 'is-invalid':  f.dob.errors }" />
@@ -143,11 +143,11 @@
       </div>	
     <div class="col-sm-6 register_right_inner_1 space_left">
       <div>
-        <input id="under12" type="radio" value="under12" name="educational" [readonly]="isReadOnly" formControlName="educational" (change)="changeGender($event)">
-        <label for="under12">Under 12</label>
+        <input id="under12" type="radio" value="under-graduate" name="educational" [readonly]="isReadOnly" formControlName="educational" (change)="changeGender($event)">
+        <label for="under12">Under Graduate</label>
     </div>
       <div>
-        <input id="under-graduate" type="radio" value="under-graduate" name="educational" [readonly]="isReadOnly" formControlName="educational" (change)="changeGender($event)">
+        <input id="under-graduate" type="radio" value="graduate" name="educational" [readonly]="isReadOnly" formControlName="educational" (change)="changeGender($event)">
         <label for="under-graduate">Graduate</label>
     </div>
 
@@ -157,7 +157,7 @@
     </div>
 
     <div>
-      <input id="otherCourse" type="radio" value="other" name="educational" [readonly]="isReadOnly" formControlName="educational" (change)="changeGender($event)">
+      <input id="otherCourse" type="radio" value="other-course" name="educational" [readonly]="isReadOnly" formControlName="educational" (change)="changeGender($event)">
       <label for="other">Any Other Professional Course</label>
   </div>
 

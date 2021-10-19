@@ -1,6 +1,7 @@
 <div class="container d-flex justify-content-center">
     <div class="row mt-2">
         <div class="col-sm-3">
+          <button class="btn btn-danger" (click)="ClearFilter()" >Clear Filter</button>
             <div class="accordion accordion-flush" id="accordionFlushExample">
                 <!-- <div class="accordion-item">
                   <h2 class="accordion-header" id="flush-headingOne">
@@ -49,19 +50,19 @@
                         <div class="filter-content">
                             <div class="card-body">
                             <label class="form-check">
-                              <input class="form-check-input" type="radio" name="exampleRadio" value="below55" (change)="filerHeight($event)">
+                              <input class="form-check-input" type="radio" name="height" value="below55" (change)="filteredData($event)" [(ngModel)]="filterData.height">
                               <span class="form-check-label">
                                 Below 5'5''
                               </span>
                             </label>
                             <label class="form-check">
-                              <input class="form-check-input" type="radio" name="exampleRadio" value="55-58" (change)="filerHeight($event)">
+                              <input class="form-check-input" type="radio" name="height" value="55-58" (change)="filteredData($event)" [(ngModel)]="filterData.height">
                               <span class="form-check-label">
                                 Between 5'5'' to 5'8''
                               </span>
                             </label>
                             <label class="form-check">
-                              <input class="form-check-input" type="radio" name="exampleRadio" value="above58" (change)="filerHeight($event)">
+                              <input class="form-check-input" type="radio" name="height" value="above58" (change)="filteredData($event)" [(ngModel)]="filterData.height">
                               <span class="form-check-label">
                                 Above 5'8''
                               </span>
@@ -82,25 +83,25 @@
                         <div class="filter-content">
                             <div class="card-body">
                             <label class="form-check">
-                              <input class="form-check-input" type="radio" name="exampleRadio" value="underGraduate" (change)="filerEduation($event)">
+                              <input class="form-check-input" type="radio" name="education" value="under-graduate" (change)="filteredData($event)" [(ngModel)]="filterData.education">
                               <span class="form-check-label">
                                 Under Graduate
                               </span>
                             </label>
                             <label class="form-check">
-                              <input class="form-check-input" type="radio" name="exampleRadio" value="graduate" (change)="filerEduation($event)">
+                              <input class="form-check-input" type="radio" name="education" value="graduate" (change)="filteredData($event)" [(ngModel)]="filterData.education">
                               <span class="form-check-label">
                                 Graduate
                               </span>
                             </label>
                             <label class="form-check">
-                              <input class="form-check-input" type="radio" name="exampleRadio" value="postGraduate" (change)="filerEduation($event)">
+                              <input class="form-check-input" type="radio" name="education" value="post-graduate" (change)="filteredData($event)" [(ngModel)]="filterData.education">
                               <span class="form-check-label">
                                 Post Graduate
                               </span>
                             </label>
                             <label class="form-check">
-                              <input class="form-check-input" type="radio" name="exampleRadio" value="otherCourse" (change)="filerEduation($event)">
+                              <input class="form-check-input" type="radio" name="education" value="other-course" (change)="filteredData($event)" [(ngModel)]="filterData.education">
                               <span class="form-check-label">
                                 Any Other Professional Course
                               </span>
@@ -121,19 +122,19 @@
                         <div class="filter-content">
                             <div class="card-body">
                             <label class="form-check">
-                              <input class="form-check-input" type="radio" name="exampleRadio" value="below25" (change)="filerAge($event)">
+                              <input class="form-check-input" type="radio" name="age" value="below25" (change)="filteredData($event)" [(ngModel)]="filterData.age">
                               <span class="form-check-label">
                                 Below 25
                               </span>
                             </label>
                             <label class="form-check">
-                              <input class="form-check-input" type="radio" name="exampleRadio" value="25-30" (change)="filerAge($event)">
+                              <input class="form-check-input" type="radio" name="age" value="25-30" (change)="filteredData($event)"[(ngModel)]="filterData.age">
                               <span class="form-check-label">
                                 25 - 30
                               </span>
                             </label>
                             <label class="form-check">
-                              <input class="form-check-input" type="radio" name="exampleRadio" value="above30" (change)="filerAge($event)">
+                              <input class="form-check-input" type="radio" name="age" value="above30" (change)="filteredData($event)" [(ngModel)]="filterData.age">
                               <span class="form-check-label">
                                 Above 30
                               </span>
@@ -149,8 +150,8 @@
             <div class="card"> 
                 <div class="card-img mt-4">
                     <img class="lazy card-img-top postthumb img-responsive mt-4"
-                        src="https://wallpaperaccess.com/full/2581085.jpg" style="width: 90%; height: 17rem; margin-left: 5%;"
-                        onerror="this.src='assets/logo.jpg'">
+                        src="{{candidate.img}}" style="width: 90%; height: 17rem; margin-left: 5%;"
+                        onerror="this.src='assets/img/logo.jpg'">
                 </div>
                 <div class="card-body pt-0 px-0">
                     <div class="d-flex flex-row justify-content-between mb-0 px-3"> <small class="text-muted mt-1"></small>
@@ -170,4 +171,21 @@
             </div>
         </div> 
     </div>
+
+
+<div class="row">
+  <div class="col-12" *ngIf=IsDataAvailable>
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center">
+        <li class="page-item" *ngIf="pageNumber !== 1">
+          <a class="page-link" (click)="MoreDeal('previous')" tabindex="-1" style="background-color: darkslategrey;color: white;">Previous Page</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" (click)="MoreDeal('next')" style="background-color: darkslategrey;     color: white">Next Page</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
 </div>

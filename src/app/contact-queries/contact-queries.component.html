@@ -1,0 +1,66 @@
+<section id="contact_us">
+           <div class="container">
+           <div class="row">
+           <div class="col-sm-12">
+           <div class="row">
+               <div class="col-lg-12 text-center">
+                   <h1 class="port">Contact Queries</h1>
+               </div>
+           </div>
+           <div class="row">
+               <div class="col-lg-6 col-lg-offset-0">
+                <div class="contact_main" >
+                  <div *ngFor="let query of contactList; index as i;">
+                      <div (click)=selectedQuery(query) class="border">
+                        <h5>{{query.name}} <span class="badge badge-secondary" *ngIf="!query.isRead">Unread</span></h5>
+                        <h6>{{query.message}}</h6>                        
+                        <br>                        
+                      </div>
+                  </div>
+                </div>
+               </div>
+               <div class="col-lg-6 col-lg-offset-0" *ngIf="IsSelected">
+                   <form [formGroup]="contactForm"> 
+                       <div class="row control-group">
+                           <div class="form-group col-xs-12 floating-label-form-group controls">
+                               <label>Name</label>
+                               <input type="text" class="form-control" placeholder="Name" readonly="true"
+                                formControlName="name"
+                                />
+                               <p class="help-block text-danger"></p>
+                           </div>
+                       </div>
+                       <div class="row control-group">
+                           <div class="form-group col-xs-12 floating-label-form-group controls">
+                               <label>Email Address</label>
+                               <input type="email" class="form-control" placeholder="Email" readonly="true"
+                                formControlName="email"
+                                 />
+                               <p class="help-block text-danger"></p>
+                           </div>
+                       </div>
+                       <div class="row control-group">
+                           <div class="form-group col-xs-12 floating-label-form-group controls">
+                               <label>Phone Number</label>
+                               <input type="number" class="form-control" placeholder="Phone Number" readonly="true"
+                                formControlName="phone"
+                                 />
+                               <p class="help-block text-danger"></p>
+                           </div>
+                       </div>
+                       <div class="row control-group">
+                           <div class="form-group col-xs-12 floating-label-form-group controls">
+                               <label>Message</label>
+                               <textarea rows="5" class="form-control" placeholder="Message" readonly="true" id="message" required="" data-validation-required-message="Please enter a message." formControlName="message"></textarea>
+                               <p class="help-block text-danger"></p>
+                           </div>
+                       </div>                       
+                   </form>
+               </div>
+               
+           </div>
+           </div>
+           </div>
+           </div>
+           </section> 
+   

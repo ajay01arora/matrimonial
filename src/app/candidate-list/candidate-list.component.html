@@ -14,7 +14,9 @@
           <tbody>
             <tr *ngFor="let candidate of CandidateList; index as i;">
               <td class="w-25">
-                  <img src="https://wallpaperaccess.com/full/2581085.jpg" class="img-fluid img-thumbnail" alt="Sheep" />
+                <img class="lazy card-img-top postthumb img-responsive mt-4"
+                src="{{candidate.img}}" style="width: 90%; height: 17rem; margin-left:-18%;"
+                onerror="this.src='assets/img/logo.jpg'">
               </td>
               <td>{{candidate.name}}</td>
               <td>{{candidate.place}}</td>

@@ -1,0 +1,19 @@
+@media screen and (max-width: 767px){
+
+	.navbar-right {
+		flex-direction: column;
+	}
+
+
+	.navbar-right li a {
+		padding: 5px 10px !important;
+		font-size: 20px !important;
+		display: block;
+	}
+
+}
+
+/* .cd-secondary-nav {
+	position: sticky;
+    top: 12px;
+} */

@@ -20,7 +20,7 @@ export class CandidateListComponent
   }
   get IsDataAvailable()
   {
-    return this.CandidateList.length != 0;
+    return this.CandidateList?.length != 0;
   }
 
   async Remove(event: any)

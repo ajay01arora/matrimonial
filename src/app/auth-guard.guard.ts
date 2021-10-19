@@ -14,9 +14,8 @@ export class AuthGuardGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       if (this.isLoggedIn()) {      
         return true;      
-        }      
-        // navigate to login page as user is not authenticated      
-     this.router.navigate(['/home']);      
+        }                 
+      this.router.navigate(['/home']);      
      return false;      
 }
 
@@ -25,10 +24,7 @@ export class AuthGuardGuard implements CanActivate {
     let status = false;      
     if (localStorage.getItem('isLoggedIn') == "true") {      
         status = true;      
-    }    
-    else {      
-        status = false;      
-        }      
+    }         
     return status;      
    }    
 }  
