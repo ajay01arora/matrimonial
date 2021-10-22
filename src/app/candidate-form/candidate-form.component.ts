@@ -120,7 +120,7 @@ export class CandidateFormComponent implements OnInit {
       }
       if(data.status == 200)
       {          
-            //this.router.navigate(['/home'])
+            this.router.navigate(['/candidate-list'])
       }else
       {
         alert(data.message);

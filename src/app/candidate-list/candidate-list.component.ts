@@ -14,7 +14,7 @@ export class CandidateListComponent
   pageNumber = 1;
 
   ngOnInit(): void {
-    this.backendService.GetCandidateList(this.pageNumber).subscribe((data : any) => {
+    this.backendService.GetCandidateListByAdminId(this.pageNumber).subscribe((data : any) => {
       this.CandidateList = data;
     });
   }
@@ -39,7 +39,7 @@ export class CandidateListComponent
     if(direction === 'next')
     {
       window.scroll(0,0)
-      this.backendService.GetCandidateList(++this.pageNumber).subscribe((data : any)=>
+      this.backendService.GetCandidateListByAdminId(++this.pageNumber).subscribe((data : any)=>
       {
         this.CandidateList = data
       });
@@ -47,7 +47,7 @@ export class CandidateListComponent
     }else if(direction === 'previous')
     {
       window.scroll(0,0)
-      this.backendService.GetCandidateList(--this.pageNumber).subscribe((data : any)=>
+      this.backendService.GetCandidateListByAdminId(--this.pageNumber).subscribe((data : any)=>
       {        
         this.CandidateList = data 
       }) 

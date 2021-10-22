@@ -61,7 +61,7 @@ export class RegisterComponent implements OnInit {
     {
       
       this.registerForm.value.img = this.imgPath;
-      const data=  await this.backendService.registerAdmin(this.registerForm.value, this.filedata)
+      const data=  await this.backendService.registerAdmin(this.registerForm.value)
       if(data.loginSuccess == true)
       {          
             this.router.navigate(['/home'])

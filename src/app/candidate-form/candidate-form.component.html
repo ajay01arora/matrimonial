@@ -293,14 +293,13 @@
    </div>
 </div>
 
-  <div class="col-sm-6 register_right_inner_1 space_left">
-    <input type="file" class="form-control" id="customFile" 
-    (change)="onFileChange($event)" 
-    [readonly]="isReadOnly" />
-  </div>
+<div class="col-sm-6 register_right_inner_1 space_left">
+  <input type="file" class="form-control" id="customFile" 
+  (change)="onFileChange($event)" />
+</div>
 
-  <div *ngIf=imgPath != "">
-    <img src="{{imgPath}}" />
+  <div *ngIf=imgPath class="col-sm-6 register_right_inner_1 space_left">
+    <img src="https://lootersisland.com/Matrimonial/Api/storage/app/public/temp/{{imgPath}}" width="250" height="250"/>
   </div>
 
 <div></div>

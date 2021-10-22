@@ -2,6 +2,7 @@ import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from './about/about.component';
 import { AdminListComponent } from './admin-list/admin-list.component';
+import { AdminProfileComponent } from './admin-profile/admin-profile.component';
 import { AuthGuardGuard } from './auth-guard.guard';
 import { CandidateFormComponent } from './candidate-form/candidate-form.component';
 import { CandidateListMenComponent } from './candidate-list-men/candidate-list-men.component';
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: "pages", component: PagesComponent },
   { path: "candidate-list", component: CandidateListComponent },
   { path: "admin-list", component: AdminListComponent },
+  { path: "admin-profile/:id", component: AdminProfileComponent },
   { path: "contact-queries", component: ContactQueriesComponent },
   { path: "services", component: ServicesComponent },
   { path: "candidate-form", component: CandidateFormComponent, canActivate: [AuthGuardGuard]},

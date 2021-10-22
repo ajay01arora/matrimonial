@@ -1,0 +1,16 @@
+<div>
+<img src ="" />
+<p>{{Admin.name}}</p>
+<p>{{Admin.phone}}</p>
+
+<hr>
+
+<div class="container">
+    <h2>Candidate List Added By Admin {{Admin.name}}</h2>
+    <div class="col-md-4 col-xs-10" *ngFor="let candidate of CandidateList; index as i;">
+        <app-card-profile [candidate]=candidate></app-card-profile>
+    </div> 
+</div>
+
+<br><br>
+</div>

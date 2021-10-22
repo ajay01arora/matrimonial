@@ -25,6 +25,8 @@ import { AgePipe } from './pipe/age.pipe';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ContactQueriesComponent } from './contact-queries/contact-queries.component';
+import { AdminProfileComponent } from './admin-profile/admin-profile.component';
+import { CardProfileComponent } from './card-profile/card-profile.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { ContactQueriesComponent } from './contact-queries/contact-queries.compo
     CandidateFormComponent,
     CandidateListMenComponent,
     AgePipe,
-    ContactQueriesComponent
+    ContactQueriesComponent,
+    AdminProfileComponent,
+    CardProfileComponent
   ],
   imports: [
     BrowserModule,

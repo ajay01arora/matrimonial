@@ -11,7 +11,7 @@ export class AdminListComponent implements OnInit {
 
   constructor(private backendService : BackendService) { }
 
-  AdminList: Array<IAdmin> =[];
+  AdminList: Array<any> =[];
   pageNumber = 1;
   currentUser:any;
   isSuperAdmin : boolean = false;
@@ -29,22 +29,29 @@ export class AdminListComponent implements OnInit {
     if(this.isSuperAdmin)
     {
       this.backendService.GetAdminListForSuperAdmin(this.pageNumber).subscribe((data : any) => {
-        this.AdminList = data;
+        this.AdminList = Object.keys(data).map(index => {
+          let admin = data[index];
+          return admin;
+      });  
       });
     }
     else
     {
-      this.backendService.GetAdminList(this.pageNumber).subscribe((data : any) => {
-        this.AdminList = data;
+      this.backendService.GetAdminList(this.pageNumber).subscribe((data :any) => {        
+           this.AdminList = Object.keys(data).map(index => {
+          let admin = data[index];
+          return admin;
+      });  
+            
       });
     }
   }
 
   async Remove(event: any)
   {
-    if(confirm("Are you sure you want to delete candidate?"))
+    if(confirm("Are you sure you want to delete admin?"))
     {
-       await this.backendService.deleteCandidate(event.target.id);
+       await this.backendService.deleteAdmin(event.target.id);
        this.AdminList.forEach((value,index)=>{
         if(value.adminId==event.target.id) this.AdminList.splice(index,1);
     });
@@ -85,13 +92,19 @@ export class AdminListComponent implements OnInit {
       if(this.isSuperAdmin)
       {
         this.backendService.GetAdminListForSuperAdmin(++this.pageNumber).subscribe((data : any) => {
-          this.AdminList = data;
+          this.AdminList = Object.keys(data).map(index => {
+            let admin = data[index];
+            return admin;
+        });  
         });
       }
       else
       {
-        this.backendService.GetAdminList(this.pageNumber).subscribe((data : any) => {
-          this.AdminList = data;
+        this.backendService.GetAdminList(++this.pageNumber).subscribe((data : any) => {
+          this.AdminList = Object.keys(data).map(index => {
+            let admin = data[index];
+            return admin;
+        });  
         });
       }
     }else if(direction === 'previous')
@@ -100,13 +113,19 @@ export class AdminListComponent implements OnInit {
       if(this.isSuperAdmin)
       {
         this.backendService.GetAdminListForSuperAdmin(--this.pageNumber).subscribe((data : any) => {
-          this.AdminList = data;
+          this.AdminList = Object.keys(data).map(index => {
+            let admin = data[index];
+            return admin;
+        });  
         });
       }
       else
       {
         this.backendService.GetAdminList(--this.pageNumber).subscribe((data : any) => {
-          this.AdminList = data;
+          this.AdminList = Object.keys(data).map(index => {
+            let admin = data[index];
+            return admin;
+        });  
         });
       }
     }

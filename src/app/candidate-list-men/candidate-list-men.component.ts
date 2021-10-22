@@ -100,6 +100,7 @@ export class CandidateListMenComponent implements OnInit {
     {
       this.filterData.age = e.target.value;
     }
+    this.filterData.gender = this.gender;
     this.backendService.GetCandidateListThroughFilter(this.filterData).subscribe((data : any)=>
     {        
       this.CandidateList = data 
