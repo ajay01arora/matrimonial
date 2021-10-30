@@ -21,9 +21,9 @@
                 <td>{{admin.place}}</td>
                 <td>{{admin.phone}}</td>
                 <td *ngIf="isSuperAdmin">
-                  <button class="btn-danger" *ngIf="admin.approved == true"  id={{admin.adminId}} (click)=approveOrReject($event)>Reject</button>
-                  <button class="btn-success" *ngIf="admin.approved == false" id="{{admin.adminId}}" (click)=approveOrReject($event)>Approve</button>
-                  <button class="btn-danger" (click)="Remove($event)" id="{{admin.adminId}}">Remove </button>
+                  <button class="btn-danger" *ngIf="admin.superadminId != 0"  id={{admin.id}} (click)=approveOrReject($event)>Reject</button>
+                  <button class="btn-success" *ngIf="admin.superadminId == 0" id="{{admin.id}}" (click)=approveOrReject($event)>Approve</button>
+                  <button class="btn-danger" (click)="Remove($event)" id="{{admin.id}}">Remove </button>
                 </td>                
               </tr>
             </tbody>

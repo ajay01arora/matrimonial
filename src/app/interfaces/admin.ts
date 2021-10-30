@@ -1,6 +1,6 @@
 export interface IAdmin
 {
-    adminId : number,
+    id : number,
     name : string,
     place: string,
     phone: string,

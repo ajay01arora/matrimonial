@@ -13,7 +13,6 @@ export class AdminListComponent implements OnInit {
 
   AdminList: Array<any> =[];
   pageNumber = 1;
-  currentUser:any;
   isSuperAdmin : boolean = false;
 
   ngOnInit(): void {
@@ -53,7 +52,7 @@ export class AdminListComponent implements OnInit {
     {
        await this.backendService.deleteAdmin(event.target.id);
        this.AdminList.forEach((value,index)=>{
-        if(value.adminId==event.target.id) this.AdminList.splice(index,1);
+        if(value.id==event.target.id) this.AdminList.splice(index,1);
     });
     }
   }
@@ -65,19 +64,22 @@ export class AdminListComponent implements OnInit {
 
   async approveOrReject(event : any)
   {
-    var approval = false;
+    var approval = 0;
     if(event.target.innerText == "Approve")
     {
-        approval =  true;
-    }
-    
+      this.backendService.currentUser?.subscribe(x => 
+        {
+          approval =  x.data.id;
+        }
+      );        
+    }    
     const response = await this.backendService.ApproveorReject(event.target.id, approval);
     if(response.status == 200)
     {
       this.AdminList.forEach(a => {
-        if(a.adminId == event.target.id)
+        if(a.id == event.target.id)
         {
-          a.approved = approval;
+          a.superadminId = approval;
         }
       });
 

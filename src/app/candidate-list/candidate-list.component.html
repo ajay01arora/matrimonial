@@ -25,8 +25,11 @@
                 <a routerLink="details/{{candidate.id}}">Details</a> | 
                 <a routerLink="edit/{{candidate.id}}">Edit</a> | 
                 <a (click)="Remove($event)" id="{{candidate.id}}">Remove</a>
-
-              </td>                
+              </td>
+              <td *ngIf="isSuperAdmin">
+                <button class="btn-danger" *ngIf="candidate.superadminid != 0"  id={{candidate.id}} (click)=approveOrReject($event)>Reject</button>
+                <button class="btn-success" *ngIf="candidate.superadminid == 0" id="{{candidate.id}}" (click)=approveOrReject($event)>Approve</button>
+              </td>                 
             </tr>
           </tbody>
         </table>   

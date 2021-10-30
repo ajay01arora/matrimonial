@@ -9,7 +9,7 @@ import { BackendService } from '../backend.service';
 })
 export class AdminProfileComponent implements OnInit {
    
-  adminId : any;
+  id : any;
   Admin : any;
   CandidateList : any;
   pageNumber = 1;
@@ -17,11 +17,11 @@ export class AdminProfileComponent implements OnInit {
   constructor(private activatedRoute : ActivatedRoute, private backendService : BackendService) { }
 
   async ngOnInit() {
-    this.adminId = this.activatedRoute.snapshot?.url[1]?.path;
-    const data =  await this.backendService.GetAdminProfile(this.adminId);    
+    this.id = this.activatedRoute.snapshot?.url[1]?.path;
+    const data =  await this.backendService.GetAdminProfile(this.id);    
     this.Admin = data[0];
 
-    this.backendService.GetCandidatesByAdminId(this.adminId, this.pageNumber).subscribe((data : any) => {
+    this.backendService.GetCandidatesByAdminId(this.id, this.pageNumber).subscribe((data : any) => {
       this.CandidateList = data;
     });
   }

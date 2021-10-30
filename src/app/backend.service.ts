@@ -11,11 +11,11 @@ const httpOptions =  {
     })
 };
 
-//const apiUrl = "http://localhost:8090/Angular%20Matrimonial/Api%20Matrimonial/api/public/";
+const apiUrl = "http://localhost:8090/Angular%20Matrimonial/Api%20Matrimonial/api/public/";
 
 //const apiUrl = "https://lootersisland.com/Matrimonial/Api/public/";
 
-const apiUrl = "http://gurjarvivah.com/Api/public/";
+//const apiUrl = "http://gurjarvivah.com/Api/public/";
 
 
 @Injectable({
@@ -23,9 +23,6 @@ const apiUrl = "http://gurjarvivah.com/Api/public/";
 })
 
 export class BackendService {
-  
-
-
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser : Observable<any> ;
    
@@ -43,8 +40,8 @@ export class BackendService {
     return await this.http.delete<any>(apiUrl+"candidate/"+customerId).toPromise();
   }
 
-  async deleteAdmin(adminId : number) {
-    return await this.http.delete<any>(apiUrl+"admin/"+adminId).toPromise();
+  async deleteAdmin(id : number) {
+    return await this.http.delete<any>(apiUrl+"admin/"+id).toPromise();
   }
  
  async  editCandidate(value: any, filedata: any) 
@@ -52,7 +49,7 @@ export class BackendService {
     var user = localStorage.getItem('currentUser');
     if(user != null)
     {
-        value.adminId = JSON.parse(user).data?.adminId;    
+        value.id = JSON.parse(user).data?.id;    
         const data = await this.http.put<any>(apiUrl+"candidate/"+value.id, value, httpOptions).toPromise();
         return data;
     }
@@ -64,7 +61,7 @@ export class BackendService {
     var user = localStorage.getItem('currentUser');
     if(user != null)
     {
-        value.adminId = JSON.parse(user).data?.adminId;            
+        value.id = JSON.parse(user).data?.id;            
     }
     return await this.http.post<any>(apiUrl+"candidate", value, httpOptions).toPromise();
   }
@@ -75,12 +72,12 @@ export class BackendService {
   }
     
   async registerAdmin(value: any) {
-    value.approved = false;    
+    value.superadminId = false;    
     const data = await this.http.post<any>(apiUrl+"admin", value, httpOptions).toPromise();
     
     if (data.loginSuccess) 
     {
-      if(data.data.approved == 1)
+      if(data.data.superadminId != 0)
       {
         localStorage.setItem('currentUser', JSON.stringify(data.admin));
         localStorage.setItem('isLoggedIn', "true");
@@ -116,7 +113,7 @@ export class BackendService {
 
     if (data.loginSuccess) {
 
-      if(data.data.approved == 1)
+      if(data.data.superadminId != 0)
       {
         alert("Login successfully");
         localStorage.setItem('currentUser', JSON.stringify(data));
@@ -161,15 +158,16 @@ export class BackendService {
   GetCandidateListByAdminId(pageNumber: number) {
 
     var user = localStorage.getItem('currentUser');
+    var id = 0;
     if(user != null)
     {
-        var adminId = JSON.parse(user).data.adminId;   
+        id = JSON.parse(user).data.id;   
     }
-    return this.http.get(apiUrl+"candidate/list/"+adminId+"/"+pageNumber);  
+    return this.http.get(apiUrl+"candidate/list/"+id+"/"+pageNumber);  
   }
 
-  GetCandidatesByAdminId(adminId : number, pageNumber: number) {
-    return this.http.get(apiUrl+"candidate/list/"+adminId+"/"+pageNumber);  
+  GetCandidatesByAdminId(id : number, pageNumber: number) {
+    return this.http.get(apiUrl+"candidate/list/"+id+"/"+pageNumber);  
   }
 
   GetCandidateListByGender(gender :string, pageNumber: number) {
@@ -180,12 +178,15 @@ export class BackendService {
     return await this.http.get<any>(apiUrl+"candidate/"+customerId).toPromise();
   }
 
-  async GetAdminProfile(adminId: number){
-    return await this.http.get<any>(apiUrl+"admin/"+adminId).toPromise();
+  async GetAdminProfile(id: number){
+    return await this.http.get<any>(apiUrl+"admin/"+id).toPromise();
   }
 
-  async ApproveorReject(adminId : number, approval : boolean) {
-    return await this.http.get<any>(apiUrl+"admin/approval/"+adminId+"/"+approval).toPromise();
+  async ApproveorReject(id : number, approval : number) {
+    return await this.http.get<any>(apiUrl+"admin/approval/"+id+"/"+approval).toPromise();
+  }
+  async ApproveorRejectBySuperAdmin(candidateId : number, approval : number) {
+    return await this.http.get<any>(apiUrl+"candidate/approval/"+candidateId+"/"+approval).toPromise();
   }
 
   GetCandidateListThroughFilter(filterData: { education: string; height: string; age: string; }) {

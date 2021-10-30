@@ -50,7 +50,7 @@ export class RegisterComponent implements OnInit {
 
   async register() 
   {
-    this.toastr.info("hello");
+    //this.toastr.info("hello");
     this.submitted=true;
     
     if (this.registerForm.invalid) {
