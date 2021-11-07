@@ -136,6 +136,24 @@
              </div> 
        </div>
    </div>
+   <div class="clearfix clear_1">
+    <div class="col-sm-3 register_right_inner_1 space_left">
+        <label for="hobby">Candidate Hobby (If any):</label>
+      </div>	
+    <div class="col-sm-6 register_right_inner_1 space_left">
+           <input type="text" class="form-control" placeholder=""
+           formControlName="hobby"
+           [readonly]="isReadOnly"
+             [ngClass]="{ 'is-invalid':  f.hobby.errors }" />
+           <div class="invalid-feedback col-md-6">
+             <span 
+             *ngIf="(f.hobby.touched || submitted) && f.hobby.errors?.required"
+             class="alert-danger">
+               Please enter the Hobby.
+             </span>
+           </div> 
+     </div>
+ </div>
 
    <div class="clearfix clear_1">
     <div class="col-sm-3 register_right_inner_1 space_left">
@@ -162,14 +180,14 @@
   </div>
 
            <input type="text" class="form-control" placeholder="Eg. BCom, BA, BTech"
-           formControlName="educational"
+           formControlName="educationalDetails"
            [readonly]="isReadOnly"
-             [ngClass]="{ 'is-invalid':  f.educational.errors }" />
+             [ngClass]="{ 'is-invalid':  f.educationalDetails.errors }" />
            <div class="invalid-feedback col-md-6">
              <span 
-             *ngIf="(f.educational.touched || submitted) && f.educational.errors?.required"
+             *ngIf="(f.educationalDetails.touched || submitted) && f.educationalDetails.errors?.required"
              class="alert-danger">
-               Please enter the educational.
+               Please enter the educational details.
              </span>
            </div> 
      </div>
@@ -204,14 +222,14 @@
     <label for="other">Any Other Profession</label>
 </div>
          <input type="text" class="form-control" placeholder=""
-         formControlName="sourceOfIncome"
+         formControlName="incomeDetails"
          [readonly]="isReadOnly"
-           [ngClass]="{ 'is-invalid':  f.sourceOfIncome.errors }" />
+           [ngClass]="{ 'is-invalid':  f.incomeDetails.errors }" />
          <div class="invalid-feedback col-md-6">
            <span 
-           *ngIf="(f.sourceOfIncome.touched || submitted) && f.sourceOfIncome.errors?.required"
+           *ngIf="(f.incomeDetails.touched || submitted) && f.incomeDetails.errors?.required"
            class="alert-danger">
-             Please enter the Source Of Income.
+             Please enter the Income Details.
            </span>
          </div> 
    </div>
@@ -315,5 +333,3 @@
      </div>
    </section>
    
-
-   <!-- [disabled]="!candidateForm.valid" -->

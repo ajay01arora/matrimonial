@@ -1,13 +1,45 @@
-.container {
-    padding: 2rem 0rem;
+span.big {
+  font-size: 140%;
+}
+
+.card-text {
+  font-size: 70%;
+
+}
+
+.card-header{
+  border: none;
+}
+
+.postthumb {
+  padding: 1px 3px;
+  cursor: pointer;
+  width: auto;
+  height: 140px;
+  display: block;
+  margin: 0 auto;
+  object-fit: scale-down;
+}
+
+.img {
+  vertical-align: middle;
+
+}
+
+.card-body{
+  cursor: pointer;
+}
+
+.cardStyle
+{
+    padding: 2px;
+ 
+   
+}
+#time {
+    color: red;
   }
-  
-  h4 {
-    margin: 2rem 0rem 1rem;
-  }
-  
-  .table-image {
-    td, th {
-      vertical-align: middle;
-    }
+
+  span.big {
+    font-size: 150%;
   }

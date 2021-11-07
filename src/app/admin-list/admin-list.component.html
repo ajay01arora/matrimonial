@@ -1,5 +1,27 @@
 <div class="container">
     <div class="row">
+      <h2>List of Super Admin</h2>
+      <div class="col-12">
+        <table class="table table-image">
+          <thead>
+            <tr>
+              <th scope="col">Image</th>
+              <th scope="col">SuperAdmin Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let admin of SuperAdminList; index as i;">
+              <td class="w-25">
+                <img class="lazy card-img-top postthumb img-responsive mt-4"
+                src="{{admin.img}}" style="width: 90%; height: 17rem; margin-left:-18%;"
+                onerror="this.src='assets/img/logo.jpg'">
+              </td>
+              <td>{{admin.name}}</td>                      
+            </tr>
+          </tbody>
+        </table>   
+    </div>
+    <h2>List of Admins</h2>
       <div class="col-12">
           <table class="table table-image">
             <thead>

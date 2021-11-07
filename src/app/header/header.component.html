@@ -54,10 +54,11 @@
                   </a>
                 <ul class="dropdown-menu">                    
                   <li><a class="color_1" routerLink="/admin-list">List of Admin</a></li>
+                  <li><a class="color_1" routerLink="/candidate-list">Candidate List</a></li>
                  <li><a class="color_1" routerLink="/contact-queries">Contact Queries</a></li>
                   </ul>
                 </li>
-                 <li class="dropdown color_1" *ngIf="currentUser">
+                 <li class="dropdown color_1" *ngIf="currentUser?.role == 'admin'">
                   <a class="dropdown-toggle" data-toggle="dropdown" href="#">Candidate
                   </a>
                 <ul class="dropdown-menu">                    

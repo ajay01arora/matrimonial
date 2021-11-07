@@ -11,11 +11,11 @@ const httpOptions =  {
     })
 };
 
-const apiUrl = "http://localhost:8090/Angular%20Matrimonial/Api%20Matrimonial/api/public/";
+//const apiUrl = "http://localhost:8090/Angular%20Matrimonial/Api%20Matrimonial/api/public/";
 
 //const apiUrl = "https://lootersisland.com/Matrimonial/Api/public/";
 
-//const apiUrl = "http://gurjarvivah.com/Api/public/";
+const apiUrl = "http://gurjarvivah.com/Api/public/";
 
 
 @Injectable({
@@ -145,6 +145,10 @@ export class BackendService {
   GetAdminListForSuperAdmin(pageNumber: number){
     return this.http.get(apiUrl+"admin/list/1/"+pageNumber);
   }
+
+  GetSuperAdminList(){
+    return this.http.get(apiUrl+"admin/superadminlist/");
+  }
   
 
   GetContactList(pageNumber: number){
@@ -163,7 +167,7 @@ export class BackendService {
     {
         id = JSON.parse(user).data.id;   
     }
-    return this.http.get(apiUrl+"candidate/list/"+id+"/"+pageNumber);  
+    return this.GetCandidatesByAdminId(id, pageNumber);  
   }
 
   GetCandidatesByAdminId(id : number, pageNumber: number) {
