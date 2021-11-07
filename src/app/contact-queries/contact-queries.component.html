@@ -13,7 +13,8 @@
                   <div *ngFor="let query of contactList; index as i;">
                       <div (click)=selectedQuery(query) class="border">
                         <h5>{{query.name}} <span class="badge badge-secondary" *ngIf="!query.isRead">Unread</span></h5>
-                        <h6>{{query.message}}</h6>                        
+                        <h6>{{query.message}}</h6>   
+                        <span class="badge badge-danger" (click)="Remove($event)" id="{{query.id}}">Remove</span>                     
                         <br>                        
                       </div>
                   </div>

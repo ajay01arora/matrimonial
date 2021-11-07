@@ -58,6 +58,18 @@ export class ContactQueriesComponent implements OnInit {
     });
   }
 
+  async Remove(event: any)
+  {
+    if(confirm("Are you sure you want to delete query?"))
+    {
+       this.IsSelected = false;
+       await this.backendService.deleteQuery(event.target.id);
+       this.contactList.forEach((value,index)=>{
+        if(value.id==event.target.id) this.contactList.splice(index,1);
+    });
+    }
+  }
+
   get f() {
     return this.contactForm.controls;
   } 

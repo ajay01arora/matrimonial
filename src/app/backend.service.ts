@@ -11,11 +11,11 @@ const httpOptions =  {
     })
 };
 
-//const apiUrl = "http://localhost:8090/Angular%20Matrimonial/Api%20Matrimonial/api/public/";
+const apiUrl = "http://localhost:8090/Angular%20Matrimonial/Api%20Matrimonial/api/public/";
 
 //const apiUrl = "https://lootersisland.com/Matrimonial/Api/public/";
 
-const apiUrl = "http://gurjarvivah.com/Api/public/";
+//const apiUrl = "http://gurjarvivah.com/Api/public/";
 
 
 @Injectable({
@@ -23,6 +23,7 @@ const apiUrl = "http://gurjarvivah.com/Api/public/";
 })
 
 export class BackendService {
+  
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser : Observable<any> ;
    
@@ -42,6 +43,10 @@ export class BackendService {
 
   async deleteAdmin(id : number) {
     return await this.http.delete<any>(apiUrl+"admin/"+id).toPromise();
+  }
+
+  async deleteQuery(id: any) {
+    return await this.http.delete<any>(apiUrl+"contact/"+id).toPromise();
   }
  
  async  editCandidate(value: any, filedata: any) 
@@ -147,7 +152,7 @@ export class BackendService {
   }
 
   GetSuperAdminList(){
-    return this.http.get(apiUrl+"admin/superadminlist/");
+    return this.http.get(apiUrl+"admin/superlist/");
   }
   
 

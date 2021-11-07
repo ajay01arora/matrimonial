@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EventManager } from '@angular/platform-browser';
 import { BackendService } from '../backend.service';
 import { IAdmin } from '../interfaces/admin';
 
@@ -53,7 +54,7 @@ export class AdminListComponent implements OnInit {
        this.AdminList.forEach((value,index)=>{
         if(value.id==event.target.id) this.AdminList.splice(index,1);
     });
-    }
+    }    
   }
 
   get IsDataAvailable()
