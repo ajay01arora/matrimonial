@@ -16,20 +16,32 @@
                 src="{{admin.img}}" style="width: 90%; height: 17rem; margin-left:-18%;"
                 onerror="this.src='assets/img/logo.jpg'">
               </td>
-              <td>{{admin.name}}</td>                      
+              <td class="table-center">{{admin.name}}</td>                      
             </tr>
           </tbody>
         </table>   
     </div>
+    <!-- <div class="col-md-4 col-sm-5 col-xs-5" *ngFor="let admin of SuperAdminList; index as i;">
+      <div class="card" style="width:400px; border:none">
+        <img class="card-img-top admin-image img-responsive" src="{{admin.img}}" alt="Card image">
+        <div class="card-body">
+          <h4 class="card-title">{{admin.name}}</h4>
+          <p class="card-text">Some example text.</p>
+          <a href="#" class="btn btn-primary">See Profile</a>
+        </div>
+      </div>
+    </div> -->
+
+    
     <h2>List of Admins</h2>
       <div class="col-12">
           <table class="table table-image">
             <thead>
               <tr>
                 <th scope="col">Image</th>
-                <th scope="col">Admin Name</th>
-                <th scope="col">Place</th>
-                <th scope="col">Phone Number</th>                                
+                <th class="table-center" scope="col">Admin Name</th>
+                <th class="table-center" scope="col">Place</th>
+                <th class="table-center"scope="col">Phone Number</th>                                
               </tr>
             </thead>
             <tbody>
@@ -39,10 +51,10 @@
                   src="{{admin.img}}" style="width: 90%; height: 17rem; margin-left:-18%;"
                   onerror="this.src='assets/img/logo.jpg'">
                 </td>
-                <td>{{admin.name}}</td>
-                <td>{{admin.place}}</td>
-                <td>{{admin.phone}}</td>
-                <td *ngIf="isSuperAdmin">
+                <td class="table-center"><a routerLink="/admin-profile/{{admin.id}}">{{admin.name}}</a></td>
+                <td class="table-center">{{admin.place}}</td>
+                <td class="table-center">{{admin.phone}}</td>
+                <td *ngIf="isSuperAdmin" class="table-center">
                   <button class="btn-danger" *ngIf="admin.superadminId != 0"  id={{admin.id}} (click)=approveOrReject($event)>Reject</button>
                   <button class="btn-success" *ngIf="admin.superadminId == 0" id="{{admin.id}}" (click)=approveOrReject($event)>Approve</button>
                   <button class="btn-danger" (click)="Remove($event)" id="{{admin.id}}">Remove </button>

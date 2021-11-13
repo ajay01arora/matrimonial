@@ -45,9 +45,6 @@ async login(f : NgForm) {
         setTimeout(() => {
           location.reload();  
         }, 1000);
-        
-    } else {
-        alert(loginData.message);
     }
 }
 

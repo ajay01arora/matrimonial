@@ -118,212 +118,213 @@
                </div> 
          </div>
      </div>
-     <div class="clearfix clear_1">
-      <div class="col-sm-3 register_right_inner_1 space_left">
-          <label for="phone">Phone Number:</label>
-        </div>	
-      <div class="col-sm-6 register_right_inner_1 space_left">
-             <input type="text" class="form-control" placeholder="Without +91"
-             formControlName="phone"
-             [readonly]="isReadOnly"
-               [ngClass]="{ 'is-invalid':  f.phone.errors }" />
-             <div class="invalid-feedback col-md-6">
-               <span 
-               *ngIf="(f.phone.touched || submitted) && f.phone.errors?.required"
-               class="alert-danger">
-                 Please enter the phone.
-               </span>
-             </div> 
-       </div>
-   </div>
-   <div class="clearfix clear_1">
-    <div class="col-sm-3 register_right_inner_1 space_left">
-        <label for="hobby">Candidate Hobby (If any):</label>
-      </div>	
-    <div class="col-sm-6 register_right_inner_1 space_left">
-           <input type="text" class="form-control" placeholder=""
-           formControlName="hobby"
-           [readonly]="isReadOnly"
-             [ngClass]="{ 'is-invalid':  f.hobby.errors }" />
-           <div class="invalid-feedback col-md-6">
-             <span 
-             *ngIf="(f.hobby.touched || submitted) && f.hobby.errors?.required"
-             class="alert-danger">
-               Please enter the Hobby.
-             </span>
-           </div> 
-     </div>
- </div>
+        <div class="clearfix clear_1">
+          <div class="col-sm-3 register_right_inner_1 space_left">
+              <label for="phone">Phone Number:</label>
+            </div>	
+          <div class="col-sm-6 register_right_inner_1 space_left">
+                <input type="text" class="form-control" placeholder="Without +91"
+                formControlName="phone"
+                [readonly]="isReadOnly"
+                  [ngClass]="{ 'is-invalid':  f.phone.errors }" />
+                <div class="invalid-feedback col-md-6">
+                  <span 
+                  *ngIf="(f.phone.touched || submitted) && f.phone.errors?.required"
+                  class="alert-danger">
+                    Please enter the phone.
+                  </span>
+                </div> 
+          </div>
+      </div>
+        <div class="clearfix clear_1">
+          <div class="col-sm-3 register_right_inner_1 space_left">
+              <label for="hobby">Candidate Hobby (If any):</label>
+            </div>	
+          <div class="col-sm-6 register_right_inner_1 space_left">
+                <input type="text" class="form-control" placeholder=""
+                formControlName="hobby"
+                [readonly]="isReadOnly"
+                  [ngClass]="{ 'is-invalid':  f.hobby.errors }" />
+                <div class="invalid-feedback col-md-6">
+                  <span 
+                  *ngIf="(f.hobby.touched || submitted) && f.hobby.errors?.required"
+                  class="alert-danger">
+                    Please enter the Hobby.
+                  </span>
+                </div> 
+          </div>
+      </div>
 
-   <div class="clearfix clear_1">
-    <div class="col-sm-3 register_right_inner_1 space_left">
-        <label for="educational">Educational:</label>
-      </div>	
-    <div class="col-sm-6 register_right_inner_1 space_left">
-      <div>
-        <input id="under12" type="radio" value="under-graduate" name="educational" [readonly]="isReadOnly" formControlName="educational" (change)="changeGender($event)">
-        <label for="under12">Under Graduate</label>
-    </div>
-      <div>
-        <input id="under-graduate" type="radio" value="graduate" name="educational" [readonly]="isReadOnly" formControlName="educational" (change)="changeGender($event)">
-        <label for="under-graduate">Graduate</label>
-    </div>
+        <div class="clearfix clear_1">
+          <div class="col-sm-3 register_right_inner_1 space_left">
+              <label for="educational">Educational:</label>
+            </div>	
+          <div class="col-sm-6 register_right_inner_1 space_left">
+            <div>
+              <input id="under12" type="radio" value="under-graduate" name="educational" [readonly]="isReadOnly" formControlName="educational" (change)="changeGender($event)">
+              <label for="under12">Under Graduate</label>
+          </div>
+            <div>
+              <input id="under-graduate" type="radio" value="graduate" name="educational" [readonly]="isReadOnly" formControlName="educational" (change)="changeGender($event)">
+              <label for="under-graduate">Graduate</label>
+          </div>
 
-    <div>
-        <input id="post-graduate" type="radio" value="post-graduate" name="educational" [readonly]="isReadOnly" formControlName="educational" (change)="changeGender($event)">
-        <label for="post-graduate">Post Graduate</label>
-    </div>
+          <div>
+              <input id="post-graduate" type="radio" value="post-graduate" name="educational" [readonly]="isReadOnly" formControlName="educational" (change)="changeGender($event)">
+              <label for="post-graduate">Post Graduate</label>
+          </div>
 
-    <div>
-      <input id="otherCourse" type="radio" value="other-course" name="educational" [readonly]="isReadOnly" formControlName="educational" (change)="changeGender($event)">
-      <label for="other">Any Other Professional Course</label>
-  </div>
+          <div>
+            <input id="otherCourse" type="radio" value="other-course" name="educational" [readonly]="isReadOnly" formControlName="educational" (change)="changeGender($event)">
+            <label for="other">Any Other Professional Course</label>
+        </div>
 
-           <input type="text" class="form-control" placeholder="Eg. BCom, BA, BTech"
-           formControlName="educationalDetails"
-           [readonly]="isReadOnly"
-             [ngClass]="{ 'is-invalid':  f.educationalDetails.errors }" />
-           <div class="invalid-feedback col-md-6">
-             <span 
-             *ngIf="(f.educationalDetails.touched || submitted) && f.educationalDetails.errors?.required"
-             class="alert-danger">
-               Please enter the educational details.
-             </span>
-           </div> 
-     </div>
- </div>
+                <input type="text" class="form-control" placeholder="Eg. BCom, BA, BTech"
+                formControlName="educationalDetails"
+                [readonly]="isReadOnly"
+                  [ngClass]="{ 'is-invalid':  f.educationalDetails.errors }" />
+                <div class="invalid-feedback col-md-6">
+                  <span 
+                  *ngIf="(f.educationalDetails.touched || submitted) && f.educationalDetails.errors?.required"
+                  class="alert-danger">
+                    Please enter the educational details.
+                  </span>
+                </div> 
+          </div>
+      </div>
 
- <div class="clearfix clear_1">
-  <div class="col-sm-3 register_right_inner_1 space_left">
-      <label for="sourceOfIncome">Source Of Income:</label>
-    </div>	
-  <div class="col-sm-6 register_right_inner_1 space_left">
-    <div>
-      <input id="government" type="radio" value="government" name="sourceOfIncome" [readonly]="isReadOnly" formControlName="sourceOfIncome" (change)="changeGender($event)">
-      <label for="government">Government</label>
-  </div>
-    <div>
-      <input id="rental" type="radio" value="rental" name="sourceOfIncome" [readonly]="isReadOnly" formControlName="sourceOfIncome" (change)="changeGender($event)">
-      <label for="rental">Rental</label>
-  </div>
+      <div class="clearfix clear_1">
+        <div class="col-sm-3 register_right_inner_1 space_left">
+            <label for="sourceOfIncome">Source Of Income:</label>
+          </div>	
+        <div class="col-sm-6 register_right_inner_1 space_left">
+          <div>
+            <input id="government" type="radio" value="government" name="sourceOfIncome" [readonly]="isReadOnly" formControlName="sourceOfIncome" (change)="changeGender($event)">
+            <label for="government">Government</label>
+        </div>
+          <div>
+            <input id="rental" type="radio" value="rental" name="sourceOfIncome" [readonly]="isReadOnly" formControlName="sourceOfIncome" (change)="changeGender($event)">
+            <label for="rental">Rental</label>
+        </div>
 
-  <div>
-      <input id="private" type="radio" value="private" name="sourceOfIncome" [readonly]="isReadOnly" formControlName="sourceOfIncome" (change)="changeGender($event)">
-      <label for="private">Private</label>
-  </div>		  
+        <div>
+            <input id="private" type="radio" value="private" name="sourceOfIncome" [readonly]="isReadOnly" formControlName="sourceOfIncome" (change)="changeGender($event)">
+            <label for="private">Private</label>
+        </div>		  
 
-  <div>
-    <input id="business" type="radio" value="business" name="sourceOfIncome" [readonly]="isReadOnly" formControlName="sourceOfIncome" (change)="changeGender($event)">
-    <label for="business">Business</label>
-</div>
+        <div>
+          <input id="business" type="radio" value="business" name="sourceOfIncome" [readonly]="isReadOnly" formControlName="sourceOfIncome" (change)="changeGender($event)">
+          <label for="business">Business</label>
+      </div>
 
-  <div>
-    <input id="other" type="radio" value="other" name="sourceOfIncome" [readonly]="isReadOnly" formControlName="sourceOfIncome" (change)="changeGender($event)">
-    <label for="other">Any Other Profession</label>
-</div>
-         <input type="text" class="form-control" placeholder=""
-         formControlName="incomeDetails"
-         [readonly]="isReadOnly"
-           [ngClass]="{ 'is-invalid':  f.incomeDetails.errors }" />
-         <div class="invalid-feedback col-md-6">
-           <span 
-           *ngIf="(f.incomeDetails.touched || submitted) && f.incomeDetails.errors?.required"
-           class="alert-danger">
-             Please enter the Income Details.
-           </span>
-         </div> 
-   </div>
-</div>
+        <div>
+          <input id="other" type="radio" value="other" name="sourceOfIncome" [readonly]="isReadOnly" formControlName="sourceOfIncome" (change)="changeGender($event)">
+          <label for="other">Any Other Profession</label>
+      </div>
+              <input type="text" class="form-control" placeholder=""
+              formControlName="incomeDetails"
+              [readonly]="isReadOnly"
+                [ngClass]="{ 'is-invalid':  f.incomeDetails.errors }" />
+              <div class="invalid-feedback col-md-6">
+                <span 
+                *ngIf="(f.incomeDetails.touched || submitted) && f.incomeDetails.errors?.required"
+                class="alert-danger">
+                  Please enter the Income Details.
+                </span>
+              </div> 
+        </div>
+      </div>
 
-<div class="clearfix clear_1">
-  <div class="col-sm-3 register_right_inner_1 space_left">
-      <label for="fatherDetails">Father Details:</label>
-    </div>	
-  <div class="col-sm-6 register_right_inner_1 space_left">
-         <input type="text" class="form-control" placeholder="Name of Gotar"
-         formControlName="fatherDetails"
-         [readonly]="isReadOnly"
-           [ngClass]="{ 'is-invalid':  f.fatherDetails.errors }" />
-         <div class="invalid-feedback col-md-6">
-           <span 
-           *ngIf="(f.fatherDetails.touched || submitted) && f.fatherDetails.errors?.required"
-           class="alert-danger">
-             Please enter the Father Details.
-           </span>
-         </div> 
-   </div>
-</div>
+      <div class="clearfix clear_1">
+        <div class="col-sm-3 register_right_inner_1 space_left">
+            <label for="fatherDetails">Father Details:</label>
+          </div>	
+        <div class="col-sm-6 register_right_inner_1 space_left">
+              <input type="text" class="form-control" placeholder="Name of Gotar"
+              formControlName="fatherDetails"
+              [readonly]="isReadOnly"
+                [ngClass]="{ 'is-invalid':  f.fatherDetails.errors }" />
+              <div class="invalid-feedback col-md-6">
+                <span 
+                *ngIf="(f.fatherDetails.touched || submitted) && f.fatherDetails.errors?.required"
+                class="alert-danger">
+                  Please enter the Father Details.
+                </span>
+              </div> 
+        </div>
+      </div>
 
-<div class="clearfix clear_1">
-  <div class="col-sm-3 register_right_inner_1 space_left">
-      <label for="motherDetails">Mother Details:</label>
-    </div>	
-  <div class="col-sm-6 register_right_inner_1 space_left">
-         <input type="text" class="form-control" placeholder="Name of Gotar"
-         formControlName="motherDetails"
-         [readonly]="isReadOnly"
-           [ngClass]="{ 'is-invalid':  f.motherDetails.errors }" />
-         <div class="invalid-feedback col-md-6">
-           <span 
-           *ngIf="(f.motherDetails.touched || submitted) && f.motherDetails.errors?.required"
-           class="alert-danger">
-             Please enter the Mother Details.
-           </span>
-         </div> 
-   </div>
-</div>
+      <div class="clearfix clear_1">
+        <div class="col-sm-3 register_right_inner_1 space_left">
+            <label for="motherDetails">Mother Details:</label>
+          </div>	
+        <div class="col-sm-6 register_right_inner_1 space_left">
+              <input type="text" class="form-control" placeholder="Name of Gotar"
+              formControlName="motherDetails"
+              [readonly]="isReadOnly"
+                [ngClass]="{ 'is-invalid':  f.motherDetails.errors }" />
+              <div class="invalid-feedback col-md-6">
+                <span 
+                *ngIf="(f.motherDetails.touched || submitted) && f.motherDetails.errors?.required"
+                class="alert-danger">
+                  Please enter the Mother Details.
+                </span>
+              </div> 
+        </div>
+      </div>
 
-<div class="clearfix clear_1">
-  <div class="col-sm-3 register_right_inner_1 space_left">
-      <label for="familyDetails">Family Details:</label>
-    </div>	
-  <div class="col-sm-6 register_right_inner_1 space_left">
-         <input type="text" class="form-control" placeholder="No. of Siblings and what they do"
-         formControlName="familyDetails"
-         [readonly]="isReadOnly"
-           [ngClass]="{ 'is-invalid':  f.familyDetails.errors }" />
-         <div class="invalid-feedback col-md-6">
-           <span 
-           *ngIf="(f.familyDetails.touched || submitted) && f.familyDetails.errors?.required"
-           class="alert-danger">
-             Please enter the Family Details.
-           </span>
-         </div> 
-   </div>
-</div>
+      <div class="clearfix clear_1">
+        <div class="col-sm-3 register_right_inner_1 space_left">
+            <label for="familyDetails">Family Details:</label>
+          </div>	
+        <div class="col-sm-6 register_right_inner_1 space_left">
+              <input type="text" class="form-control" placeholder="No. of Siblings and what they do"
+              formControlName="familyDetails"
+              [readonly]="isReadOnly"
+                [ngClass]="{ 'is-invalid':  f.familyDetails.errors }" />
+              <div class="invalid-feedback col-md-6">
+                <span 
+                *ngIf="(f.familyDetails.touched || submitted) && f.familyDetails.errors?.required"
+                class="alert-danger">
+                  Please enter the Family Details.
+                </span>
+              </div> 
+        </div>
+      </div>
 
-<div class="clearfix clear_1">
-  <div class="col-sm-3 register_right_inner_1 space_left">
-      <label for="currentAddress">Current Address:</label>
-    </div>	
-  <div class="col-sm-6 register_right_inner_1 space_left">
-         <input type="text" class="form-control" placeholder="Currently living"
-         formControlName="currentAddress"
-         [readonly]="isReadOnly"
-           [ngClass]="{ 'is-invalid':  f.currentAddress.errors }" />
-         <div class="invalid-feedback col-md-6">
-           <span 
-           *ngIf="(f.currentAddress.touched || submitted) && f.currentAddress.errors?.required"
-           class="alert-danger">
-             Please enter the currentAddress.
-           </span>
-         </div> 
-   </div>
-</div>
+      <div class="clearfix clear_1">
+        <div class="col-sm-3 register_right_inner_1 space_left">
+            <label for="currentAddress">Current Address:</label>
+          </div>	
+        <div class="col-sm-6 register_right_inner_1 space_left">
+              <input type="text" class="form-control" placeholder="Currently living"
+              formControlName="currentAddress"
+              [readonly]="isReadOnly"
+                [ngClass]="{ 'is-invalid':  f.currentAddress.errors }" />
+              <div class="invalid-feedback col-md-6">
+                <span 
+                *ngIf="(f.currentAddress.touched || submitted) && f.currentAddress.errors?.required"
+                class="alert-danger">
+                  Please enter the currentAddress.
+                </span>
+              </div> 
+        </div>
+      </div>
+      <div class="clearfix clear_1">
+      <div class="col-sm-6 register_right_inner_1 space_left" *ngIf="pageName != 'details'">
+        <input type="file" class="form-control" id="customFile" 
+        (change)="onFileChange($event)" />
+      </div>
+    
 
-<div class="col-sm-6 register_right_inner_1 space_left">
-  <input type="file" class="form-control" id="customFile" 
-  (change)="onFileChange($event)" />
-</div>
-
-  <div *ngIf=imgPath class="col-sm-6 register_right_inner_1 space_left">
-    <img src="https://lootersisland.com/Matrimonial/Api/storage/app/public/temp/{{imgPath}}" width="250" height="250"/>
-  </div>
-
-<div></div>
-
-        <div class="clearfix col-sm-12 clear_2">
+      <div *ngIf=imgPath class="col-sm-6 register_right_inner_1 space_left">
+        <img src="{{imgPath}}" width="250" height="250"/>
+      </div>
+      </div>
+      <div class="clearfix clear_1" *ngIf="pageName != 'details'">
+        <div class="clearfix col-sm-12 clear_2" >
             <button type="submit" class="btn btn-primary" [disabled]="!candidateForm.valid">{{saveButton}}</button>
+        </div>
         </div>
         </div>
        </form>

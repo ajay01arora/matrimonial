@@ -10,7 +10,8 @@ export class CandidateListComponent
 { 
   constructor(private backendService : BackendService) { }
 
-  CandidateList!: Array<any>;
+  NotApprovedCandidateList : Array<any>;
+  ApprovedCandidateList : Array<any>;
   pageNumber = 1;
   isSuperAdmin : boolean = false;
 
@@ -27,30 +28,48 @@ export class CandidateListComponent
     if(this.isSuperAdmin)
     {
       this.backendService.GetCandidateList(this.pageNumber).subscribe((data : any) => {
-        this.CandidateList = data;
+        this.ApprovedCandidateList = data.approved;
+        this.NotApprovedCandidateList = data.not_approved;
       });
     }
     else
     {
       this.backendService.GetCandidateListByAdminId(this.pageNumber).subscribe((data : any) => {
-        this.CandidateList = data;
+        this.ApprovedCandidateList = data.approved;
+        this.NotApprovedCandidateList = data.not_approved;
       });
     }
   }
-  get IsDataAvailable()
+  get IsApprovedCandidate()
   {
-    return this.CandidateList?.length != 0;
+    return this.ApprovedCandidateList?.length != 0;
+  }
+
+  get IsNotApprovedCandidate()
+  {
+    return this.NotApprovedCandidateList?.length != 0;
   }
 
   async Remove(event: any)
   {
     if(confirm("Are you sure you want to delete candidate?"))
     {
-       await this.backendService.deleteCandidate(event.target.id);
-       this.CandidateList.forEach((value,index)=>{
-        if(value.id==event.target.id) this.CandidateList.splice(index,1);
-    });
+
+      var candidateId = event.target.id;
+       await this.backendService.deleteCandidate(candidateId);
+        this.RemoveCandidateById(candidateId);
     }
+  }
+
+  private RemoveCandidateById(candidateId: any) {
+    this.NotApprovedCandidateList.forEach((value, index) => {
+      if (value.id == candidateId)
+        this.NotApprovedCandidateList.splice(index, 1);
+    });
+    this.ApprovedCandidateList.forEach((value, index) => {
+      if (value.id == candidateId)
+        this.ApprovedCandidateList.splice(index, 1);
+    });
   }
 
   async approveOrReject(event : any)
@@ -67,13 +86,29 @@ export class CandidateListComponent
     const response = await this.backendService.ApproveorRejectBySuperAdmin(event.target.id, approval);
     if(response.status == 200)
     {
-      this.CandidateList.forEach(a => {
-        if(a.id == event.target.id)
-        {
-          a.superadminid = approval;
-        }
-      });
 
+      if(event.target.innerText == "Approve")      
+      {
+        this.NotApprovedCandidateList.forEach(a => {
+          if(a.id == event.target.id)
+          {
+            a.superadminId = approval;
+            this.RemoveCandidateById(a.id);
+            this.ApprovedCandidateList.push(a);
+          }
+        });
+      }
+      else
+      {
+        this.ApprovedCandidateList.forEach(a => {
+          if(a.id == event.target.id)
+          {
+            a.superadminId = approval;
+            this.RemoveCandidateById(a.id);
+            this.NotApprovedCandidateList.push(a);
+          }
+        });
+      }
     }
   }
 
@@ -86,14 +121,16 @@ export class CandidateListComponent
       {
         this.backendService.GetCandidateList(++this.pageNumber).subscribe((data : any)=>
         {
-          this.CandidateList = data
+          this.ApprovedCandidateList = data.approved;
+          this.NotApprovedCandidateList = data.not_approved;
         });
       }
       else
       {
         this.backendService.GetCandidateListByAdminId(++this.pageNumber).subscribe((data : any)=>
         {
-          this.CandidateList = data
+          this.ApprovedCandidateList = data.approved;
+        this.NotApprovedCandidateList = data.not_approved;
         });
       }
 
@@ -104,14 +141,16 @@ export class CandidateListComponent
       {
         this.backendService.GetCandidateList(--this.pageNumber).subscribe((data : any)=>
         {
-          this.CandidateList = data
+          this.ApprovedCandidateList = data.approved;
+        this.NotApprovedCandidateList = data.not_approved;
         });
       }
       else
       {
         this.backendService.GetCandidateListByAdminId(--this.pageNumber).subscribe((data : any)=>
         {
-          this.CandidateList = data
+          this.ApprovedCandidateList = data.approved;
+        this.NotApprovedCandidateList = data.not_approved;
         });
       }
     }

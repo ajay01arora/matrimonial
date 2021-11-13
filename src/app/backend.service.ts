@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import { IAdmin } from './interfaces/admin';
 import {  BehaviorSubject,  Observable } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 const httpOptions =  {
   headers: new HttpHeaders(
@@ -11,11 +11,11 @@ const httpOptions =  {
     })
 };
 
-const apiUrl = "http://localhost:8090/Angular%20Matrimonial/Api%20Matrimonial/api/public/";
+//const apiUrl = "http://localhost:8090/Angular%20Matrimonial/Api%20Matrimonial/api/public/";
 
 //const apiUrl = "https://lootersisland.com/Matrimonial/Api/public/";
 
-//const apiUrl = "http://gurjarvivah.com/Api/public/";
+const apiUrl = "http://gurjarvivah.com/Api/public/";
 
 
 @Injectable({
@@ -27,7 +27,7 @@ export class BackendService {
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser : Observable<any> ;
    
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private toaster : ToastrService) {
     var user = localStorage.getItem('currentUser');
     if(user != null)
     {
@@ -49,30 +49,31 @@ export class BackendService {
     return await this.http.delete<any>(apiUrl+"contact/"+id).toPromise();
   }
  
- async  editCandidate(value: any, filedata: any) 
+ async  editCandidate(value: any) 
  {
     var user = localStorage.getItem('currentUser');
     if(user != null)
     {
-        value.id = JSON.parse(user).data?.id;    
+        value.adminId = JSON.parse(user).data?.id;    
         const data = await this.http.put<any>(apiUrl+"candidate/"+value.id, value, httpOptions).toPromise();
         return data;
     }
   }
 
 
-  async registerCandidate(value: any, filedata: any) {
+  async registerCandidate(value: any) {
 
     var user = localStorage.getItem('currentUser');
     if(user != null)
     {
-        value.id = JSON.parse(user).data?.id;            
+        value.adminId = JSON.parse(user).data?.id;            
     }
     return await this.http.post<any>(apiUrl+"candidate", value, httpOptions).toPromise();
   }
 
   async contactSuperAdmin(value: any) {
     const data = await this.http.post<any>(apiUrl+"contact", value, httpOptions).toPromise();
+    this.toaster.success(data.message);
     return data;
   }
     
@@ -90,8 +91,12 @@ export class BackendService {
       }
       else 
       {
-        alert("Your account is not approved yet. Please contact to the super admin via call or contact page."); 
+        this.toaster.error("Your account is not approved yet. Please contact to the super admin via call or contact page."); 
       }
+    }
+    else
+    {
+      this.toaster.error(data.message);
     }
      return data;
   }
@@ -106,7 +111,7 @@ export class BackendService {
 
       /* Image Post Request */
       const data = await this.http.post<any>(apiUrl+"admin/image", myFormData, {headers: headers}).toPromise();
-      console.log("imgData: "+data)
+      console.log("imgData: "+data.imgPath)
       return data;
 
   }
@@ -116,19 +121,23 @@ export class BackendService {
     const data = await this.http.get<any>(apiUrl+"admin/login?username="+username+"&password="+password).toPromise();
     console.log("login "+data);
 
-    if (data.loginSuccess) {
-
-      if(data.data.superadminId != 0)
-      {
-        alert("Login successfully");
-        localStorage.setItem('currentUser', JSON.stringify(data));
-        localStorage.setItem('isLoggedIn', "true");
-        this.currentUserSubject?.next(data);
-      }
-      else 
-      {
-        alert("Your account is not approved yet. Please contact to the super admin via call or contact page."); 
-      }
+    if (data.loginSuccess) 
+    {
+        if(data.data.superadminId != 0)
+        {
+          this.toaster.success("Login successfully");
+          localStorage.setItem('currentUser', JSON.stringify(data));
+          localStorage.setItem('isLoggedIn', "true");
+          this.currentUserSubject?.next(data);
+        }
+        else 
+        {
+          this.toaster.error("Your account is not approved yet. Please contact to the super admin via call or contact page."); 
+        }
+     }
+     else
+     {
+      this.toaster.error(data.message); 
      }
 
      return data;
@@ -204,7 +213,5 @@ export class BackendService {
 
   async updateQuery(id: any) {
     return await this.http.get<any>(apiUrl+"contact/read/"+id).toPromise();
-  }
-
-  
+  }  
 }

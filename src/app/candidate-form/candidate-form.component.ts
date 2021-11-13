@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup,FormBuilder, Validators} from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { BackendService } from '../backend.service';
 
 @Component({
@@ -9,8 +10,9 @@ import { BackendService } from '../backend.service';
   styleUrls: ['./candidate-form.component.css']
 })
 export class CandidateFormComponent implements OnInit {
+  
 
-  constructor(public activatedRoute : ActivatedRoute, private fb : FormBuilder, private router : Router, private backendService : BackendService) { }
+  constructor(public activatedRoute : ActivatedRoute, private fb : FormBuilder, private router : Router, private backendService : BackendService, private toaster : ToastrService) { }
 
   candidateForm!: FormGroup;
   saveButton : string = "Register";
@@ -20,6 +22,7 @@ export class CandidateFormComponent implements OnInit {
   pageName : string = "";
   isReadOnly : boolean =false;
   imgPath : string = "";
+  tempImagePath: string;
 
   async ngOnInit(){
 
@@ -51,14 +54,13 @@ export class CandidateFormComponent implements OnInit {
 
       if(this.pageName == "details")
       {
-        this.isReadOnly = true;
+        this.isReadOnly = true;        
       }
       else if(this.pageName == "edit")
       {
         this.saveButton = "Update details";
-        this.imgPath = data.img;
-        
       }
+      this.imgPath = "http://gurjarvivah.com/Api/storage/app/public/images/"+data.img;
     }
     else
     {
@@ -93,8 +95,8 @@ export class CandidateFormComponent implements OnInit {
 
       if(data.status == 200)
       {
-          this.candidateForm.value.img = data.imgPath;
-          this.imgPath = data.imgPath;
+          this.tempImagePath = data.imgPath;
+          this.imgPath = "http://gurjarvivah.com/Api/storage/app/public/images/"+data.imgPath;
       }
     }
   }
@@ -114,27 +116,31 @@ export class CandidateFormComponent implements OnInit {
 
     if (this.candidateForm.valid && this.imgPath != "")
     {
-      this.candidateForm.value.img = this.imgPath;
+      this.candidateForm.value.img = this.tempImagePath;
       var data;
       if(this.pageName == "edit")
       {
-         data=  await this.backendService.editCandidate(this.candidateForm.value, this.filedata)
+         data=  await this.backendService.editCandidate(this.candidateForm.value)
       }else
       {
-         data=  await this.backendService.registerCandidate(this.candidateForm.value, this.filedata)
+         data=  await this.backendService.registerCandidate(this.candidateForm.value)
          
       }
       if(data.status == 200)
-      {          
-            this.router.navigate(['/candidate-list'])
+      {     
+        if(data.candidate.superadminId == 0)
+        {
+          this.toaster.info("Candidate is added and need to be approved from any super admin!");
+        }
+        this.router.navigate(['/candidate-list'])
       }else
       {
-        alert(data.message);
+        this.toaster.error(data.message);
       }
     }
     else
     {
-      alert("Img is not uploaded yet. Please try again!")
+      this.toaster.error("Img is not uploaded yet. Please try again!")
     }
   }
 

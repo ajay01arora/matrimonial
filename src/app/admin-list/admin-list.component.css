@@ -25,6 +25,17 @@ span.big {
   vertical-align: middle;
 
 }
+.admin-image
+{
+  max-width: 300px;
+  max-height: 400px;
+}
+
+.table-center
+{
+  vertical-align: middle;
+  text-align:center;
+}
 
 .card-body{
   cursor: pointer;

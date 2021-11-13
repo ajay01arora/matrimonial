@@ -1,6 +1,7 @@
 <div class="container">
   <div class="row">
-    <div class="col-12" *ngIf=IsDataAvailable>
+    <h2>Not Approved Candidates</h2>
+    <div class="col-12" *ngIf=IsNotApprovedCandidate>
         <table class="table table-image">
           <thead>
             <tr>
@@ -8,11 +9,12 @@
               <th scope="col">Candidate Name</th>
               <th scope="col">Place</th>
               <th scope="col">Phone Number</th> 
+              <th scope="col">Admin Name</th> 
               <th scope="col">Action</th>                
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let candidate of CandidateList; index as i;">
+            <tr *ngFor="let candidate of NotApprovedCandidateList; index as i;">
               <td class="w-25">
                 <img class="lazy card-img-top postthumb img-responsive mt-4"
                 src="{{candidate.img}}" style="width: 90%; height: 17rem; margin-left:-18%;"
@@ -21,25 +23,65 @@
               <td>{{candidate.name}}</td>
               <td>{{candidate.place}}</td>
               <td>{{candidate.phone}}</td>
+              <td>{{candidate.adminName}}</td>              
               <td>
                 <a routerLink="details/{{candidate.id}}">Details</a> | 
                 <a routerLink="edit/{{candidate.id}}">Edit</a> | 
-                <a (click)="Remove($event)" id="{{candidate.id}}">Remove</a>
+                <a routerLink="/candidate-list" (click)="Remove($event)" id="{{candidate.id}}">Remove</a>
               </td>
               <td *ngIf="isSuperAdmin">
-                <button class="btn-danger" *ngIf="candidate.superadminid != 0"  id={{candidate.id}} (click)=approveOrReject($event)>Reject</button>
-                <button class="btn-success" *ngIf="candidate.superadminid == 0" id="{{candidate.id}}" (click)=approveOrReject($event)>Approve</button>
+                <button class="btn-danger" *ngIf="candidate.superadminId != 0"  id={{candidate.id}} (click)=approveOrReject($event)>Reject</button>
+                <button class="btn-success" *ngIf="candidate.superadminId == 0" id="{{candidate.id}}" (click)=approveOrReject($event)>Approve</button>
               </td>                 
             </tr>
           </tbody>
         </table>   
     </div>
-    <div class="col-12" *ngIf= !IsDataAvailable>
-      <h2>No Candidate Added or Remaining. </h2>
+    <h2>Approved Candidates</h2>
+    <div class="col-12" *ngIf=IsApprovedCandidate>
+      <table class="table table-image">
+        <thead>
+          <tr>
+            <th scope="col">Image</th>
+            <th scope="col">Candidate Name</th>
+            <th scope="col">Place</th>
+            <th scope="col">Phone Number</th> 
+            <th scope="col">Admin Name</th> 
+            <th scope="col">Super Admin Name</th> 
+            <th scope="col">Action</th>                
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let candidate of ApprovedCandidateList; index as i;">
+            <td class="w-25">
+              <img class="lazy card-img-top postthumb img-responsive mt-4"
+              src="{{candidate.img}}" style="width: 90%; height: 17rem; margin-left:-18%;"
+              onerror="this.src='assets/img/logo.jpg'">
+            </td>
+            <td>{{candidate.name}}</td>
+            <td>{{candidate.place}}</td>
+            <td>{{candidate.phone}}</td>
+            <td>{{candidate.adminName}}</td>
+            <td>{{candidate.superadminName}}</td>
+            <td>
+              <a routerLink="details/{{candidate.id}}">Details</a> | 
+              <a routerLink="edit/{{candidate.id}}">Edit</a> | 
+              <a routerLink="/candidate-list" (click)="Remove($event)" id="{{candidate.id}}">Remove</a>
+            </td>
+            <td *ngIf="isSuperAdmin">
+              <button class="btn-danger" *ngIf="candidate.superadminId != 0"  id={{candidate.id}} (click)=approveOrReject($event)>Reject</button>
+              <button class="btn-success" *ngIf="candidate.superadminId == 0" id="{{candidate.id}}" (click)=approveOrReject($event)>Approve</button>
+            </td>                 
+          </tr>
+        </tbody>
+      </table>   
+  </div>
+    <div class="col-12" *ngIf= !IsApprovedCandidate>
+      <h5>No Approved Candidate Yet! </h5>
     </div>
   </div>
   <div class="row">
-    <div class="col-12" *ngIf=IsDataAvailable>
+    <div class="col-12" *ngIf=IsApprovedCandidate>
       <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
           <li class="page-item" *ngIf="pageNumber !== 1">

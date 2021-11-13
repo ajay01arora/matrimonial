@@ -3,16 +3,15 @@ import { FormGroup,FormBuilder, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { BackendService } from '../backend.service';
 
-import { ToastrService } from 'ngx-toastr';
-
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+  tempImgPath: any;
 
-  constructor(public fb : FormBuilder, private router : Router, private backendService : BackendService, private toastr:ToastrService) { }
+  constructor(public fb : FormBuilder, private router : Router, private backendService : BackendService) { }
 
   registerForm!: FormGroup;
   saveButton : string = "Register";
@@ -38,8 +37,8 @@ export class RegisterComponent implements OnInit {
 
       if(data.status == 200)
       {
-          this.registerForm.value.img = data.imgPath;
-          this.imgPath = data.imgPath;
+          this.tempImgPath = data.imgPath;
+          this.imgPath = "http://gurjarvivah.com/Api/storage/app/public/images/"+data.imgPath;
       }
     }
   }
@@ -58,16 +57,12 @@ export class RegisterComponent implements OnInit {
      }
 
     if (this.registerForm.valid && this.imgPath != "")
-    {
-      
-      this.registerForm.value.img = this.imgPath;
+    { 
+      this.registerForm.value.img = this.tempImgPath;
       const data=  await this.backendService.registerAdmin(this.registerForm.value)
       if(data.loginSuccess == true)
       {          
             this.router.navigate(['/home'])
-      }else
-      {
-        alert(data.message);
       }
     }      
   }

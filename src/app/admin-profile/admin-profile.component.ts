@@ -22,7 +22,7 @@ export class AdminProfileComponent implements OnInit {
     this.Admin = data[0];
 
     this.backendService.GetCandidatesByAdminId(this.id, this.pageNumber).subscribe((data : any) => {
-      this.CandidateList = data;
+      this.CandidateList = data.approved;
     });
   }
 

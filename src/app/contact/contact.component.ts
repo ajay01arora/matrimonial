@@ -3,9 +3,6 @@ import { FormGroup,FormBuilder, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { BackendService } from '../backend.service';
 
-import { ToastrService } from 'ngx-toastr';
-
-
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
@@ -13,7 +10,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ContactComponent implements OnInit {
 
-  constructor(public fb : FormBuilder, private router : Router, private backendService : BackendService, private toastr:ToastrService) { }
+  constructor(public fb : FormBuilder, private router : Router,
+             private backendService : BackendService) { }
 
   contactForm!: FormGroup;
   saveButton : string = "Contact Us";
@@ -45,8 +43,6 @@ export class ContactComponent implements OnInit {
     if (this.contactForm.valid)
     {
       const data=  await this.backendService.contactSuperAdmin(this.contactForm.value)
-      alert(data.message);
-     
     }      
   }
 

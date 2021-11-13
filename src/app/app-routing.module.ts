@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: "register", component: RegisterComponent },
   { path: "contact", component: ContactComponent },
   { path: "pages", component: PagesComponent },
-  { path: "candidate-list", component: CandidateListComponent },
+  { path: "candidate-list", component: CandidateListComponent, canActivate: [AuthGuardGuard] },
   { path: "admin-list", component: AdminListComponent },
   { path: "admin-profile/:id", component: AdminProfileComponent },
   { path: "contact-queries", component: ContactQueriesComponent },

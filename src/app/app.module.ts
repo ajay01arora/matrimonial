@@ -58,7 +58,7 @@ import { CardProfileComponent } from './card-profile/card-profile.component';
     BrowserAnimationsModule,
     ToastrModule.forRoot(
       {
-        timeOut :1000,
+        timeOut :2000,
         progressBar : true,
         progressAnimation: 'increasing'
       }
