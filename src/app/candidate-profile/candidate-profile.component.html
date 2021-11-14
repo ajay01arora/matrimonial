@@ -1,0 +1,150 @@
+<section id="about_heading" class="about_register">
+    <div class="container">
+     <div class="row">
+      <div class="col-sm-12">
+       <div class="about_heading">
+         <h5><a routerLink="/home">Home</a> <span>//</span>Candidate-Profile</h5>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+   
+   <section id="register" class="clearfix">
+    <div class="register clearfix">
+     <div class="col-sm-9">
+      <div class="register_right">
+        <h3>Candidate Profile</h3>
+        <hr> 
+       <div class="register_right_inner clearfix">
+        <div class="clearfix clear_1">
+          <div class="col-sm-3 register_right_inner_1 space_left">
+              <label for="gender">Gender:</label>
+            </div>	
+          <div class="col-sm-6 register_right_inner_1 space_left">
+            <div>
+                {{candidate.gender}}
+           </div>
+   
+           <div>
+              
+           </div>
+                 
+           </div>
+         </div>
+        <div class="clearfix clear_1">
+           <div class="col-sm-3 register_right_inner_1 space_left">
+               <label for="name">Name:</label>
+             </div>	
+           <div class="col-sm-6 register_right_inner_1 space_left">
+                {{candidate.name}}
+            </div>
+        </div>
+        <div class="clearfix clear_1">
+          <div class="col-sm-3 register_right_inner_1 space_left">
+              <label for="dob">Date of Birth:</label>
+            </div>	
+          <div class="col-sm-6 register_right_inner_1 space_left">
+            {{candidate.dob | age}}
+           </div>
+        </div>
+
+       <div class="clearfix clear_1">
+        <div class="col-sm-3 register_right_inner_1 space_left">
+            <label for="place">Native Dist. And Village:</label>
+          </div>	
+        <div class="col-sm-6 register_right_inner_1 space_left">
+            {{candidate.place}}
+         </div>
+      </div>
+      <div class="clearfix clear_1">
+        <div class="col-sm-3 register_right_inner_1 space_left">
+            <label for="height">Height:</label>
+          </div>	
+        <div class="col-sm-6 register_right_inner_1 space_left">
+            {{candidate.height | height}}
+        </div>
+     </div>
+        <div class="clearfix clear_1">
+          <div class="col-sm-3 register_right_inner_1 space_left">
+              <label for="phone">Phone Number:</label>
+            </div>	
+          <div class="col-sm-6 register_right_inner_1 space_left">
+            {{candidate.phone}}
+          </div>
+      </div>
+        <div class="clearfix clear_1">
+          <div class="col-sm-3 register_right_inner_1 space_left">
+              <label for="hobby">Candidate Hobby (If any):</label>
+            </div>	
+          <div class="col-sm-6 register_right_inner_1 space_left">
+            {{candidate.hobby}}
+          </div>
+      </div>
+
+        <div class="clearfix clear_1">
+          <div class="col-sm-3 register_right_inner_1 space_left">
+              <label for="educational">Educational Details:</label>
+            </div>	
+          <div class="col-sm-6 register_right_inner_1 space_left">
+            {{candidate.education}}
+        </div>
+        {{candidate.educationalDetails}}
+          </div>
+
+      <div class="clearfix clear_1">
+        <div class="col-sm-3 register_right_inner_1 space_left">
+            <label for="sourceOfIncome">Source Of Income of Candidate:</label>
+          </div>	
+          {{candidate.sourceOfIncome}}
+        </div>
+    {{candidate.IncomeDetails}}
+        </div>
+      </div>
+
+      <div class="clearfix clear_1">
+        <div class="col-sm-3 register_right_inner_1 space_left">
+            <label for="fatherDetails">Father Details:</label>
+          </div>	
+          {{candidate.fatherDetails}}
+        </div>
+   
+
+      <div class="clearfix clear_1">
+        <div class="col-sm-3 register_right_inner_1 space_left">
+            <label for="motherDetails">Mother Details:</label>
+          </div>	
+        <div class="col-sm-6 register_right_inner_1 space_left">
+            {{candidate.motherDetails}}
+        </div>
+      </div>
+
+      <div class="clearfix clear_1">
+        <div class="col-sm-3 register_right_inner_1 space_left">
+            <label for="familyDetails">Family Details:</label>
+          </div>	
+        <div class="col-sm-6 register_right_inner_1 space_left">
+            {{candidate.familyDetails}}
+        </div>
+      </div>
+
+      <div class="clearfix clear_1">
+        <div class="col-sm-3 register_right_inner_1 space_left">
+            <label for="currentAddress">Current Address:</label>
+          </div>	
+        <div class="col-sm-6 register_right_inner_1 space_left">
+            {{candidate.address}}
+        </div>
+      </div>
+      <div class="clearfix clear_1">
+    
+
+      <div *ngIf=candidate.img class="col-sm-6 register_right_inner_1 space_left">
+        <img src="http://gurjarvivah.com/Api/storage/app/public/images/{{candidate.img}}" width="250" height="250"/>
+      </div>
+      </div>
+     
+        </div>
+
+       </div>
+   </section>

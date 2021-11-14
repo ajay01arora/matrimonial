@@ -13,11 +13,14 @@ import {HomeComponent} from './home/home.component'
 import { PagesComponent } from './pages/pages.component';
 import { RegisterComponent } from './register/register.component';
 import { ServicesComponent } from './services/services.component';
+import { MembershipComponent } from './membership/membership.component';
+import { CandidateProfileComponent } from './candidate-profile/candidate-profile.component';
 
 const routes: Routes = [
   { path: "", component: HomeComponent},
   { path: "home", component: HomeComponent},
   {path:"about",component:AboutComponent},
+  {path:"mebershipCondtion",component:MembershipComponent},
   { path: "register", component: RegisterComponent },
   { path: "contact", component: ContactComponent },
   { path: "pages", component: PagesComponent },
@@ -31,6 +34,7 @@ const routes: Routes = [
   { path: "candidate-list/female", component: CandidateListMenComponent },
   { path: "candidate-list/edit/:id", component: CandidateFormComponent, canActivate: [AuthGuardGuard] },
   { path: "candidate-list/details/:id", component: CandidateFormComponent },
+  { path: "candidate-profile/:id", component: CandidateProfileComponent },
 ];
 
 @NgModule({

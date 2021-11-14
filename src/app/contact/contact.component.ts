@@ -43,6 +43,12 @@ export class ContactComponent implements OnInit {
     if (this.contactForm.valid)
     {
       const data=  await this.backendService.contactSuperAdmin(this.contactForm.value)
+      this.contactForm = this.fb.group({
+        name : ["", [Validators.required]],
+        email : ["", [Validators.required]],
+        message : ["", [Validators.required, Validators.minLength(5)]],
+        phone : ["", [Validators.required, Validators.minLength(10)]]
+      });
     }      
   }
 

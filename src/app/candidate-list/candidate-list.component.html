@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <h2>Not Approved Candidates</h2>
-    <div class="col-12" *ngIf=IsNotApprovedCandidate>
+    <!-- <div class="col-12" *ngIf=IsNotApprovedCandidate>
         <table class="table table-image">
           <thead>
             <tr>
@@ -36,46 +36,84 @@
             </tr>
           </tbody>
         </table>   
-    </div>
-    <h2>Approved Candidates</h2>
-    <div class="col-12" *ngIf=IsApprovedCandidate>
-      <table class="table table-image">
-        <thead>
-          <tr>
-            <th scope="col">Image</th>
-            <th scope="col">Candidate Name</th>
-            <th scope="col">Place</th>
-            <th scope="col">Phone Number</th> 
-            <th scope="col">Admin Name</th> 
-            <th scope="col">Super Admin Name</th> 
-            <th scope="col">Action</th>                
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let candidate of ApprovedCandidateList; index as i;">
-            <td class="w-25">
-              <img class="lazy card-img-top postthumb img-responsive mt-4"
-              src="{{candidate.img}}" style="width: 90%; height: 17rem; margin-left:-18%;"
-              onerror="this.src='assets/img/logo.jpg'">
-            </td>
-            <td>{{candidate.name}}</td>
-            <td>{{candidate.place}}</td>
-            <td>{{candidate.phone}}</td>
-            <td>{{candidate.adminName}}</td>
-            <td>{{candidate.superadminName}}</td>
-            <td>
-              <a routerLink="details/{{candidate.id}}">Details</a> | 
+    </div> -->
+
+    <div class="container-fluid ">
+      <div class="col-lg-12 col-md-12" *ngIf=IsNotApprovedCandidate>
+      <div class="row">
+          <div class="col-lg-4 col-md-3 col-sm-4 col-6 mb-2 cardStyle" *ngFor="let candidate of NotApprovedCandidateList; index as i;">
+            <div class="row no-gutters">
+              <div class="col-md-4">
+                <img src="{{candidate.img}}" class="card-img" alt="Admin_image">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">Name: {{candidate.name}}</h5>
+                  <p class="card-text">PLACE: {{candidate.place}}</p>
+                  <p class="card-text">Phone: {{candidate.phone}}</p>
+                  <p class="card-text">Admin Name: {{candidate.adminName}}</p>
+                  <p class="card-text">SuperAdmin Name: {{candidate.superadminName}}</p>
+
+                  <div>
+                    <a routerLink="details/{{candidate.id}}">Details</a> | 
               <a routerLink="edit/{{candidate.id}}">Edit</a> | 
               <a routerLink="/candidate-list" (click)="Remove($event)" id="{{candidate.id}}">Remove</a>
-            </td>
-            <td *ngIf="isSuperAdmin">
+
+
+              <div *ngIf="isSuperAdmin">
+                <button class="btn-danger" *ngIf="candidate.superadminId != 0"  id={{candidate.id}} (click)=approveOrReject($event)>Reject</button>
+                <button class="btn-success" *ngIf="candidate.superadminId == 0" id="{{candidate.id}}" (click)=approveOrReject($event)>Approve</button>
+              </div>
+           
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          
+      </div>
+    </div>
+      </div>
+    <h2>Approved Candidates</h2>
+
+    <div class="container-fluid ">
+      <div class="col-lg-12 col-md-12" *ngIf=IsApprovedCandidate>
+      <div class="row">
+          <div class="col-lg-4 col-md-3 col-sm-4 col-6 mb-2 cardStyle" *ngFor="let candidate of ApprovedCandidateList; index as i;">
+            <div class="row no-gutters">
+              <div class="col-md-4">
+                <img src="{{candidate.img}}" class="card-img" alt="Admin_image">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">Name: {{candidate.name}}</h5>
+                  <p class="card-text">PLACE: {{candidate.place}}</p>
+                  <p class="card-text">Phone: {{candidate.phone}}</p>
+                  <p class="card-text">Admin Name: {{candidate.adminName}}</p>
+                  <p class="card-text">SuperAdmin Name: {{candidate.superadminName}}</p>
+
+                  <div>
+                    <a routerLink="details/{{candidate.id}}">Details</a> | 
+              <a routerLink="edit/{{candidate.id}}">Edit</a> | 
+              <a routerLink="/candidate-list" (click)="Remove($event)" id="{{candidate.id}}">Remove</a>
+
+              <div *ngIf="isSuperAdmin">
               <button class="btn-danger" *ngIf="candidate.superadminId != 0"  id={{candidate.id}} (click)=approveOrReject($event)>Reject</button>
               <button class="btn-success" *ngIf="candidate.superadminId == 0" id="{{candidate.id}}" (click)=approveOrReject($event)>Approve</button>
-            </td>                 
-          </tr>
-        </tbody>
-      </table>   
-  </div>
+            </div>
+           
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          
+      </div>
+    </div>
+
+      </div>
     <div class="col-12" *ngIf= !IsApprovedCandidate>
       <h5>No Approved Candidate Yet! </h5>
     </div>

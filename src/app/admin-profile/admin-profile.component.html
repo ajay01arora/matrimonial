@@ -1,8 +1,29 @@
 <div>
-<img src ="{{Admin.img}}" />
-<p>{{Admin.name}}</p>
-<p>{{Admin.phone}}</p>
 
+<div class="container ">
+    <h2>Admin Name:  {{Admin.name}}</h2>
+    <hr>
+    <div class="col-lg-12 col-md-12" >
+    <div class="row">
+        <div class="col-lg-12 ">
+          <div class="row no-gutters">
+            <div class="col-md-4">
+              <img src="{{Admin.img}}"class="card-img" alt="Admin_image">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <p class="card-text"></p> 
+                  <h4><b>Name:  {{Admin.name}}</b></h4>
+                  <h4><b>Contact Number:  {{Admin.phone}}</b></h4>
+                  <h4><b> Place:  {{Admin.place}}</b></h4>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+    </div>
+  </div>
+    </div>
 <hr>
 
 <div class="container">

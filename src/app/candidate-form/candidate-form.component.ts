@@ -18,11 +18,9 @@ export class CandidateFormComponent implements OnInit {
   saveButton : string = "Register";
   submitted:Boolean=false;
   filedata : any;
-  candidate : any;
   pageName : string = "";
   isReadOnly : boolean =false;
   imgPath : string = "";
-  tempImagePath: string;
 
   async ngOnInit(){
 
@@ -32,16 +30,20 @@ export class CandidateFormComponent implements OnInit {
     if(customerId)
     {
       const data = await this.backendService.GetCandidateById(customerId);      
-
+      var heightInFeet = data.height.toString().split(".")[0];
+      var heightInInch = data.height.toString().split(".")[1];
+      heightInInch = heightInInch.replace(/^0+/, '');
       this.candidateForm = this.fb.group({
         id : [data.id],
         name : [data.name, [Validators.required]],
         dob : [data.dob, [Validators.required]],
         gender : [data.gender, [Validators.required]],
         place : [data.place, [Validators.required]],
-        height : [data.height, [Validators.required]],
+        heightInFeet : [heightInFeet, [Validators.required]],
+        heightInInch : [heightInInch, [Validators.required]],
         phone : [data.phone, [Validators.required]],
         hobby : [data.hobby],
+        img : [data.img],
         educational : [data.educational, [Validators.required]],
         educationalDetails : [data.educationalDetails, [Validators.required]],
         sourceOfIncome : [data.sourceOfIncome, [Validators.required]],
@@ -69,9 +71,11 @@ export class CandidateFormComponent implements OnInit {
           dob : ["", [Validators.required]],
           gender : ["", [Validators.required]],
           place : ["", [Validators.required]],
-          height : ["", [Validators.required]],
+          heightInFeet : ["", [Validators.required]],
+          heightInInch : ["", [Validators.required]],
           phone : ["", [Validators.required]],
           hobby : [""],
+          img : [""],
           educational : ["", [Validators.required]],
           educationalDetails : ["", [Validators.required]],
           sourceOfIncome : ["", [Validators.required]],
@@ -95,7 +99,6 @@ export class CandidateFormComponent implements OnInit {
 
       if(data.status == 200)
       {
-          this.tempImagePath = data.imgPath;
           this.imgPath = "http://gurjarvivah.com/Api/storage/app/public/images/"+data.imgPath;
       }
     }
@@ -116,7 +119,15 @@ export class CandidateFormComponent implements OnInit {
 
     if (this.candidateForm.valid && this.imgPath != "")
     {
-      this.candidateForm.value.img = this.tempImagePath;
+      if(this.candidateForm.value.heightInInch > 9)
+      {
+        this.candidateForm.value.height = this.candidateForm.value.heightInFeet + "." + this.candidateForm.value.heightInInch;
+      }
+      else
+      {
+      this.candidateForm.value.height = this.candidateForm.value.heightInFeet + ".0" + this.candidateForm.value.heightInInch;
+      }
+      this.candidateForm.value.img = this.imgPath;
       var data;
       if(this.pageName == "edit")
       {

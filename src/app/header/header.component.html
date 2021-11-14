@@ -12,7 +12,7 @@
      <p>GurjarVivah.com</p>
     </div>
    </div>
-   <div class="col-sm-6">
+   <div class="col-sm-6 hide">
      <div class="top_right clearfix text-right">
        <span class="span_1"><i class="fa fa-phone-square"></i>  +91 - 9811265609  </span>
        <span class="span_2"> <i class="fa fa-whatsapp"></i>  +91 - 9811265609 </span>
@@ -45,7 +45,7 @@
                <ul class="nav navbar-right">
                  <li><a class="color_1 active_1" routerLink="/home">Home</a></li>
                  <li><a class="color_1" routerLink="/about">About Us</a></li>
-                 <li><a class="color_1" routerLink="/services">Services</a></li>
+                 <li><a class="color_1" routerLink="/services">Gallery</a></li>
                  <li *ngIf="currentUser?.role != 'super-admin'"><a class="color_1" routerLink="/contact">Contact Us</a></li>
                  <li *ngIf="currentUser?.role != 'super-admin'"><a class="color_1" routerLink="/admin-list">List of Admin</a></li>
                  
@@ -73,9 +73,9 @@
                    </div>
                  </li>
                  <ng-template #notShow>
-                   <li><a class="color_1" routerLink="/register">Register</a></li>
-                   <li><a href="#myModal" class="color_1 trigger-btn" data-toggle="modal">Login</a></li>
-                 </ng-template>
+                  <li style="display: inline;"><a class="color_1" routerLink="/register">Register</a></li>
+                  <li style="display: inline;"><a href="#myModal" class="color_1 trigger-btn" data-toggle="modal">Login</a></li>
+                </ng-template>
                </ul>
              </div>
              <!-- /.navbar-collapse -->

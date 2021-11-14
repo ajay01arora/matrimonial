@@ -149,11 +149,15 @@
         <div class="col-sm-3" *ngFor="let candidate of CandidateList; index as i;">
           <app-card-profile [candidate]=candidate></app-card-profile>
         </div> 
+        <div class="col-sm-3" *ngIf="!IsDataAvailable">
+          <h4>No Candidate Added or Remaining.</h4>
+        </div> 
     </div>
 
 
+</div>
 <div class="row">
-  <div class="col-12" *ngIf=IsDataAvailable>
+  <div class="col-12 offset-4" *ngIf=IsDataAvailable>
     <nav aria-label="Page navigation example">
       <ul class="pagination justify-content-center">
         <li class="page-item" *ngIf="pageNumber !== 1">
@@ -165,6 +169,4 @@
       </ul>
     </nav>
   </div>
-</div>
-
 </div>

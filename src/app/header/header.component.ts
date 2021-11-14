@@ -1,7 +1,7 @@
 import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import {  Router } from '@angular/router';
+import {  ActivatedRoute, Router } from '@angular/router';
 import { BackendService } from '../backend.service';
 
 @Component({
@@ -11,12 +11,14 @@ import { BackendService } from '../backend.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private router: Router, private backendService : BackendService) {  }
+  constructor(public activatedRoute : ActivatedRoute, private router: Router, private backendService : BackendService) {  }
   
   show:boolean=false;
   currentUser:any;
 
   ngOnInit(): void {
+    var pageName = this.activatedRoute.snapshot?.url[1]?.path;
+
     this.backendService.currentUser?.subscribe(x => 
            {
              this.currentUser = x

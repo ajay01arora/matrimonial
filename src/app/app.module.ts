@@ -13,7 +13,6 @@ import { RegisterComponent } from './register/register.component';
 import { PagesComponent } from './pages/pages.component';
 import { HomeComponent } from './home/home.component';
 import { CandidateListComponent } from './candidate-list/candidate-list.component';
-import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { AdminListComponent } from './admin-list/admin-list.component';
@@ -27,6 +26,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ContactQueriesComponent } from './contact-queries/contact-queries.component';
 import { AdminProfileComponent } from './admin-profile/admin-profile.component';
 import { CardProfileComponent } from './card-profile/card-profile.component';
+import { MembershipComponent } from './membership/membership.component';
+import { HeightPipe } from './pipe/height.pipe';
+import { CandidateProfileComponent } from './candidate-profile/candidate-profile.component';
 
 @NgModule({
   declarations: [
@@ -44,14 +46,16 @@ import { CardProfileComponent } from './card-profile/card-profile.component';
     CandidateFormComponent,
     CandidateListMenComponent,
     AgePipe,
+    HeightPipe,
     ContactQueriesComponent,
     AdminProfileComponent,
-    CardProfileComponent
+    CardProfileComponent,
+    MembershipComponent,
+    CandidateProfileComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MDBBootstrapModule,
     HttpClientModule,
     FormsModule,    
     ReactiveFormsModule,
